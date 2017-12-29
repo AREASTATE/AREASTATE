@@ -2,21 +2,7 @@
 <div class="row area_mainContent">
 	<div class="col-xs-2 col-md-offset-1 area_mainBorderStyle"
 		style="padding: 0px;">
-		<div class="area_left_nav">
-			<leftnav items="items"></leftnav>
-		</div>
-		<!-- <div class="accordion" id="accordion2">
-			<div class="accordion-group"  ng-repeat="item in items">
-				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" style="float:left;"
-						data-parent="#accordion2" href="#collapseOne">{{item.name}}</a><span class="glyphicon glyphicon-chevron-right" style="float:right;"> </span>
-				</div>
-				<div id="collapseOne" class="accordion-body collapse"
-					style="height: 0px;" ng-repeat="childItem in item.childItems">
-					<div class="accordion-inner">{{childItem.name}}</div>
-				</div>
-			</div>
-		</div> -->
+		<leftnav items="items"></leftnav>
 	</div>
 	<div class="col-xs-7 area_content"
 		style="border-left: 9px solid #6d8198" ui-view></div>
