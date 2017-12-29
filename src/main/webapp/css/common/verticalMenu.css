@@ -1,4 +1,4 @@
-.VerticalMenu {
+/* .VerticalMenu {
   height: 100%;
   width: 100%;
   cursor: pointer;
@@ -15,9 +15,9 @@
   padding-right: 10px;
   transition: background-color 0.4s linear;
 }
-/* .VerticalMenu > div > div:first-child:hover {
+.VerticalMenu > div > div:first-child:hover {
   background-color: ;
-} */
+}
 .VerticalMenu > div > div:first-child > i:last-child {
   line-height: 40px;
   float: right;
@@ -50,4 +50,4 @@
 .VerticalMenu > div:last-child::after {
   display: block;
   clear: both;
-}
+} */

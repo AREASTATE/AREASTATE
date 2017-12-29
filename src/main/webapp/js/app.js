@@ -136,6 +136,11 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/land/js/landDisplay.js",
 			               "../views/land/js/landService.js"]
 		}))
+		//状态一览
+		.state("main.landStateList",angularAMD.route({
+			url:"/landStateList",
+			templateUrl:"../views/landState/html/landStateList.html",
+		}))
 	});
 	return angularAMD.bootstrap(app);
 });

@@ -1,20 +1,13 @@
-<div class="VerticalMenu">
-	<div ng-repeat="parentItem in items" class="leftnav_parentItem out">
+<ul style="padding: 0px;">
+	<li ng-repeat="item in items" class="pli">
 		<div ng-click="expand($event)" class="ev"
-			style="height: 50px; line-height: 50px; width: 250px;">
-			<span class="out_span">
-				<span class="float_left">{{parentItem.name}}</span>
-				<span class="glyphicon glyphicon-chevron-right" style="line-height: 50px; float: right;"></span>
-			</span>
+			style="padding-left: 20px;">
+			<span
+				style="text-align: left; display: inline-block; height: 40px; line-height: 40px; width: 85%;">{{item.name}}</span><span
+				class="glyphicon glyphicon-chevron-right"> </span>
 		</div>
-		<div class="sub" style="border-top: 1px solid #ccc;">
-			<div ng-repeat="childItem in parentItem.childItems"
-				ng-click="goAim(childItem.url)"
-				style="color: #666; font-size: 14px; font-weight: 500;">
-				<div>
-					<span>{{childItem.name}}</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+		<ul style="padding: 0px; display: none;" class="sub">
+			<li ng-repeat="childItem in item.childItems" class="sli" ng-click="goAim(childItem.url)">{{childItem.name}}</li>
+		</ul>
+	</li>
+</ul>
