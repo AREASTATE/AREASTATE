@@ -5,18 +5,20 @@ public class User {
 	
 	private Long eid;
 	
-	private String userName;
+	private String userName;//http.sslVerify=false
 	
 	private String address;
 	
-	private String tel;
+	private String tel;  
 	
 	private String email;
 	
 	private String loginNo;
 	
-	private String loginPwd;
-
+	private String loginPwd;  
+    
+	private String employeeNo; 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -79,6 +81,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getEmployeeNo() {
+		return employeeNo;
+	}
+
+	public void setEmployeeNo(String employeeNo) {
+		this.employeeNo = employeeNo;
 	}
 	
 }
