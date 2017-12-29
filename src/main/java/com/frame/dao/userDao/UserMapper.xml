@@ -6,7 +6,7 @@
 	<insert id="addUser" parameterType="com.frame.entity.user.User">
 		insert into
 		user(eid,loginNo,loginPwd,email,tel,address,userName,employeeNo) values(#{eid},#{loginNo},#{loginPwd},#{email},#{tel},#{address},#{userName},#{employeeNo})
-	</insert>
+	</insert> 
 
 	<insert id="updateUser" parameterType="com.frame.entity.user.User">
 		update user
