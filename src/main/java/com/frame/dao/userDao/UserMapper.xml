@@ -5,7 +5,7 @@
 	<!-- <select id="save" resultType="java.util.Map"> SELECT * FROM class </select> -->
 	<insert id="addUser" parameterType="com.frame.entity.user.User">
 		insert into
-		user(eid,loginNo,loginPwd) values(#{eid},#{loginNo},#{loginPwd})
+		user(eid,loginNo,loginPwd,email,tel,address,userName,employeeNo) values(#{eid},#{loginNo},#{loginPwd},#{email},#{tel},#{address},#{userName},#{employeeNo})
 	</insert>
 
 	<insert id="updateUser" parameterType="com.frame.entity.user.User">
@@ -14,6 +14,11 @@
 			<if test="eid != null">user.eid=#{eid},</if>
 			<if test="loginNo != null">user.loginNo=#{loginNo},</if>
 			<if test="loginPwd != null">user.loginPwd=#{loginPwd},</if>
+			<if test="email != null">user.email=#{email},</if>
+			<if test="tel != null">user.tel=#{tel},</if>
+			<if test="address != null">user.address=#{address},</if>
+			<if test="userName != null">user.userName=#{userName},</if>
+			<if test="employeeNo != null">user.employeeNo=#{employeeNo},</if>
 		</set>
 		where user.id=#{id}
 	</insert>
