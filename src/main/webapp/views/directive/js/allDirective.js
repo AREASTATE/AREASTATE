@@ -12,7 +12,7 @@ angular.module("directiveModel",[])
 				var ngClickEle = target.parent(".ev");
 				var subMenuEle = ngClickEle.next();
 				subMenuEle.slideToggle("fast");
-				$(".sub").not(subMenuEle).slideUp("fast");
+				$(".sul").not(subMenuEle).slideUp("fast");
 			}
 			
 			$scope.goAim = function(url){

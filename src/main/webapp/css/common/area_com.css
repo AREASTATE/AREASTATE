@@ -42,8 +42,8 @@
 
 .sli {
 	text-align: center;
-	height: 30px;
-	line-height: 30px;
+	height: 35px;
+	line-height: 35px;
 	list-style: none;
 	font-size: 14px;
 	font-weight: 400;
@@ -53,4 +53,22 @@
 .sli:HOVER {
 	background: #be4708;
 	color: white;
+}
+
+.pname {
+	text-align: left;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	width: 85%;
+}
+
+.sul {
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+
+.ev{
+	padding-left: 20px;
 }

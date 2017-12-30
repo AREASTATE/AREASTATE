@@ -1,12 +1,10 @@
 <ul class="pul">
 	<li ng-repeat="item in items" class="pli">
-		<div ng-click="expand($event)" class="ev"
-			style="padding-left: 20px;">
-			<span
-				style="text-align: left; display: inline-block; height: 40px; line-height: 40px; width: 85%;">{{item.name}}</span><span
+		<div ng-click="expand($event)" class="ev">
+			<span class="pname">{{item.name}}</span><span
 				class="glyphicon glyphicon-chevron-right"> </span>
 		</div>
-		<ul style="padding: 0px;margin:0px; display: none;" class="sub">
+		<ul class="sul">
 			<li ng-repeat="childItem in item.childItems" class="sli" ng-click="goAim(childItem.url)">{{childItem.name}}</li>
 		</ul>
 	</li>
