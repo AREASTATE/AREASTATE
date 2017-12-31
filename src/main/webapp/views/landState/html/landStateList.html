@@ -1,33 +1,21 @@
 
-<fieldset>
+<fieldset ng-init="init()">
 	<table class="table table-bordered">
-		<caption>场地状态信息</caption>
+		<caption>用地占用情况</caption>
 		<thead>
 			<tr>
-				<th></th>
+				<th>日期</th>
 				<th>上午</th>
 				<th>下午</th>
 				<th>晚上</th>
 			</tr>
 		</thead>       
 		<tbody>
-			<tr>
-				<td>12月1日</td>
-				<td>已锁定</td>
-				<td>已分配</td>
-				<td>已锁定</td>
-			</tr>
-			<tr>
-				<td>12月2日</td>
-				<td>已锁定</td>
-				<td>已分配</td>
-				<td>已锁定</td>
-			</tr>
-			<tr>
-				<td>12月3日</td>
-				<td>已锁定</td>
-				<td>已分配</td>
-				<td>已锁定</td>
+			<tr ng-repeat="landDailyState in landDailyStates">
+				<td>{{landDailyState.date|date:'yyyy年MM月dd号'}}</td>
+				<td><span ng-if="landDailyState.amState!='可用'">{{landDailyState.amState}}</span><a ng-if="landDailyState.amState=='可用'">{{landDailyState.amState}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></a></td>
+				<td><span ng-if="landDailyState.pmState!='可用'">{{landDailyState.pmState}}</span><a ng-if="landDailyState.pmState=='可用'">{{landDailyState.pmState}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></a></td>
+				<td><span ng-if="landDailyState.nightState!='可用'">{{landDailyState.nightState}}</span><a ng-if="landDailyState.nightState=='可用'">{{landDailyState.nightState}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></a></td>
 			</tr>
 		</tbody>
 	</table>

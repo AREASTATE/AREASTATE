@@ -140,6 +140,9 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 		.state("main.landStateList",angularAMD.route({
 			url:"/landStateList",
 			templateUrl:"../views/landState/html/landStateList.html",
+			controller:"landStateListController",
+			controllerUrl:["../views/landState/js/landStateList.js",
+			               "../views/landState/js/landStateService.js"]
 		}))
 	});
 	return angularAMD.bootstrap(app);
