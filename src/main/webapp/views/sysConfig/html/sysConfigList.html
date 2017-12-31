@@ -1,0 +1,30 @@
+<fieldset ng-init="init()" style="padding: 25px;">
+	<legend style="font-size: 14px;">配置信息</legend>
+	<table class="table table-bordered">
+		<!-- <caption>用地信息</caption> -->
+		<thead>
+			<tr>
+				<th>配置类型</th>
+				<th>键</th>
+				<th>值</th>
+				<th>创建日期</th>
+				<th style="width: 150px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-if="sysConfigList.length == 0">
+				<td colspan="5"
+					style="text-align: center; height: 100px; line-height: 100px">暂无相关信息</td>
+			</tr>
+			<tr ng-repeat="sysConfig in sysConfigList">
+				<td>{{sysConfig.type}}</td>
+				<td>{{sysConfig.property}}</td>
+				<td>{{sysConfig.value}}</td>
+				<td>{{sysConfig.inputDate|date:'yyyy-MM-dd'}}</td>
+				<td><a ng-click="displaySysConfig(sysConfig.id)">查看</a>&nbsp;&nbsp;&nbsp;<a
+					ng-click="editSysConfig(sysConfig.id)">编辑</a>&nbsp;&nbsp;&nbsp;<a ng-if="sysConfig.property!='展示用地状态数据天数'"
+					ng-click="deleteSysConfig(sysConfig.id)">删除</a></td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>

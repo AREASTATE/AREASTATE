@@ -88,6 +88,7 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/log/js/logList.js",
 			               "../views/log/js/logService.js"],
 		}))
+/****************************************PersonnalCenter Start****************************************************/
 		//个人中心
 		.state("main.personnalCenter",angularAMD.route({
 			url:"/personnalCenter/:id",
@@ -96,6 +97,8 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/personnal/js/personnalCenter.js",
 			               "../views/login_register/js/login_registerService.js"],
 		}))
+/****************************************Personnalcenter End****************************************************/
+/****************************************Land Start****************************************************/
 		//用地列表
 		.state("main.landList",angularAMD.route({
 			url:"/landList",
@@ -128,6 +131,42 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/land/js/landDisplay.js",
 			               "../views/land/js/landService.js"]
 		}))
+/****************************************Land End****************************************************/
+/****************************************SysConfig Start****************************************************/
+		//系统配置咧白哦
+		.state("main.sysConfigList",angularAMD.route({
+			url:"/sysConfigList",
+			templateUrl:"../views/sysConfig/html/sysConfigList.html",
+			controller:"sysConfigListController",
+			controllerUrl:["../views/sysConfig/js/sysConfigList.js",
+			               "../views/sysConfig/js/sysConfigService.js"]
+		}))
+		//新增系统配置
+		.state("main.sysConfigAddForm",angularAMD.route({
+			url:"/sysConfigAddForm",
+			templateUrl:"../views/sysConfig/html/sysConfigForm.html",
+			controller:"sysConfigFormController",
+			controllerUrl:["../views/sysConfig/js/sysConfigForm.js",
+			               "../views/sysConfig/js/sysConfigService.js"]
+		}))
+		//编辑系统配置
+		.state("main.sysConfigEditForm",angularAMD.route({
+			url:"/sysConfigEditForm/:id/:operate",
+			templateUrl:"../views/sysConfig/html/sysConfigForm.html",
+			controller:"sysConfigFormController",
+			controllerUrl:["../views/sysConfig/js/sysConfigForm.js",
+			               "../views/sysConfig/js/sysConfigService.js"]
+		}))
+		//查看系统配置
+		.state("main.sysConfigDisplay",angularAMD.route({
+			url:"/sysConfigDisplay/:id",
+			templateUrl:"../views/sysConfig/html/sysConfigDisplay.html",
+			controller:"sysConfigDisplayController",
+			controllerUrl:["../views/sysConfig/js/sysConfigDisplay.js",
+			               "../views/sysConfig/js/sysConfigService.js"]
+		}))
+/****************************************SysConfig End****************************************************/
+/****************************************LandState Start****************************************************/
 		//状态一览
 		.state("main.landStateList",angularAMD.route({
 			url:"/landStateList",
@@ -138,5 +177,6 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			               "../views/land/js/landService.js"]
 		}))
 	});
+/****************************************LandState End****************************************************/
 	return angularAMD.bootstrap(app);
 });

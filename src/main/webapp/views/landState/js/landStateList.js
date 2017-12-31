@@ -6,6 +6,15 @@ controller("landStateListController",["$scope","$state","LandStateService","Land
 		
 		function suc1(data){
 			$scope.landList = data;
+			
+			$scope.landAvailable = false;
+			for(var i = 0; i < $scope.landList.length; i ++){
+				if($scope.landList[i].landState == "启用"){
+					$scope.landAvailable = true;
+					break;
+				}
+			}
+			
 			$scope.currentLandName = $scope.landList[0].landName;
 			LandStateService.getLandDailyState($scope.landList[0].id,suc2,ero2);
 			function suc2(landDailyStates){

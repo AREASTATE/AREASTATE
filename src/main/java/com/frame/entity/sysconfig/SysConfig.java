@@ -1,11 +1,15 @@
 package com.frame.entity.sysconfig;
 
+import java.util.Date;
+
 /**
  * 
  * @author 李桥
  * 系统配置类
  */
 public class SysConfig {
+	
+	public Integer id ;
 	/**
 	 * 属性
 	 */
@@ -16,7 +20,42 @@ public class SysConfig {
 	 */
 	public String value;
 	
-	public static void main(String [] args){
-		System.out.println(Integer.class.getName());
+	/**
+	 * 属性类型（这里仅仅包含两个，字符和数值类型）
+	 */
+	public String type;
+	/**
+	 * 配置日期
+	 */
+	public Date inputDate;
+	public String getProperty() {
+		return property;
+	}
+	public void setProperty(String property) {
+		this.property = property;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public Date getInputDate() {
+		return inputDate;
+	}
+	public void setInputDate(Date inputDate) {
+		this.inputDate = inputDate;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

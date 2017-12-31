@@ -13,18 +13,33 @@ import org.springframework.stereotype.Service;
 
 import com.frame.entity.land.Land;
 import com.frame.entity.landDailyState.LandDailyState;
+import com.frame.entity.sysconfig.SysConfig;
 import com.frame.service.landService.LandService;
 import com.frame.service.landStateCreaterService.LandStateCreaterService;
+import com.frame.service.sysConfigService.SysConfigService;
 
 @Service("landStateCreaterService")
 public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	
 	@Autowired
 	private LandService landService;
+	@Autowired
+	private SysConfigService sysConfigService;
 
 	@Override
 	public List<LandDailyState> getLandDailyState(Integer landId,HttpServletRequest request) {
-		return landDailyStateHander(landId);
+		SysConfig sysConfig = sysConfigService.findSysConfigByProperty("展示用地状态数据天数", request);
+		List<LandDailyState> landDailyStates;
+		if(sysConfig==null){
+			/**
+			 * 默认展示15天状态
+			 */
+			landDailyStates = landDailyStateHander(landId,15);
+		}else{
+			Integer displayDay = Integer.parseInt(sysConfig.getValue());
+			landDailyStates = landDailyStateHander(landId,displayDay);
+		}
+		return landDailyStates;
 	}
 
 
@@ -34,12 +49,12 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LandDailyState> initialLandDailyState(Integer landId){
+	private List<LandDailyState> initialLandDailyState(Integer landId,Integer displayDay){
 		ArrayList<LandDailyState> landDailyStates = new ArrayList<LandDailyState>();
 		//用地信息
 		Land land = landService.findLandById(landId, null);
 		//初始化上午、下午、晚上都是可用状态
-		for(int i = 0; i < 5; i ++){
+		for(int i = 0; i < displayDay; i ++){
 			Calendar calendar = Calendar.getInstance();
 			LandDailyState landDailyState = new LandDailyState();
 			calendar.add(Calendar.DATE, i);
@@ -59,14 +74,14 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LandLockApplication> loadMySqlDataOfLandLockApplication(Integer landId){
+	private List<LandLockApplication> loadMySqlDataOfLandLockApplication(Integer landId,Integer displayDay){
 		String [] stage = {"上午","下午","晚上"};
 
 		String [] state = {"可用","锁定","已分配"};
 
 		ArrayList<LandLockApplication> landLockApplications = new ArrayList<LandLockApplication>();
 
-		for(int i = 0; i < 5; i ++){
+		for(int i = 0; i < displayDay; i ++){
 			Calendar calendar = Calendar.getInstance();
 			LandLockApplication landLockApplication = new LandLockApplication();
 			int index = (int)(Math.round(Math.random()*2));
@@ -88,9 +103,9 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LandDailyState> landDailyStateHander(Integer landId){
-		ArrayList<LandLockApplication> landLockApplications = (ArrayList<LandLockApplication>) loadMySqlDataOfLandLockApplication(landId);
-		List<LandDailyState> landDailyStates = initialLandDailyState(landId);
+	private List<LandDailyState> landDailyStateHander(Integer landId,Integer displayDay){
+		ArrayList<LandLockApplication> landLockApplications = (ArrayList<LandLockApplication>) loadMySqlDataOfLandLockApplication(landId,displayDay);
+		List<LandDailyState> landDailyStates = initialLandDailyState(landId,displayDay);
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd"); 
 		for(int i = 0; i < landLockApplications.size(); i ++){
 			for(int j = 0; j < landDailyStates.size(); j ++){

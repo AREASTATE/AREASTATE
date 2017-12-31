@@ -89,7 +89,8 @@ landStateList页面
 	border: 1px solid;
 	/* background: yellow; */
 	color: black;
-	padding: 5px;
+	padding: 2px;
+	float: left;
 }
 
 .landAClick {
@@ -98,5 +99,10 @@ landStateList页面
 	border: 1px solid;
 	background: yellow;
 	color: black;
-	padding: 5px;
+	padding: 2px;
+	float: left;
+}
+
+.no_decoratin{
+	text-decoration: none !important;
 }

@@ -1,12 +1,19 @@
 
 <fieldset ng-init="init()">
-	<div class="row landContainer">
-		<a ng-repeat="land in landList" ng-class="($index == 0) ? 'landAClick':'landAinit'"
-			ng-click="getLandDailyState(land,$event)">{{land.landName}}</a>
+	<div class="row landContainer" ng-if="landAvailable == false" style="color: red;">
+		所有场地都被禁用
+	</div>
+	
+	<div class="row landContainer" ng-if="landAvailable">
+		<a ng-repeat="land in landList"
+			ng-class="($index == 0) ? 'landAClick':'landAinit'"
+			ng-if="land.landState!='禁用'"
+			ng-click="getLandDailyState(land,$event)"
+			style="margin-bottom: 10px;">{{land.landName}}</a>
 	</div>
 	<table class="table table-bordered">
 		<caption>
-			<span style="color: red; font-size: 17px;">{{currentLandName}}</span>占用情况
+			<span style="color: red; font-size: 17px;">{{landAvailable?currentLandName:"用地"}}</span>占用情况
 		</caption>
 		<thead>
 			<tr>
@@ -17,17 +24,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="landDailyState in landDailyStates">
+			<tr ng-if="sysConfigList.length == 0 || landAvailable == false">
+				<td colspan="4"
+					style="text-align: center; height: 100px; line-height: 100px">暂无相关信息</td>
+			</tr>
+			<tr ng-if="landAvailable" ng-repeat="landDailyState in landDailyStates">
 				<td>{{landDailyState.date|date:'yyyy年MM月dd号'}}</td>
-				<td><span ng-if="landDailyState.amState!='可用'">{{landDailyState.amState}}</span><a
-					ng-if="landDailyState.amState=='可用'">{{landDailyState.amState}}&nbsp;&nbsp;&nbsp;&nbsp;<span
-						class="glyphicon glyphicon-plus"></span></a></td>
-				<td><span ng-if="landDailyState.pmState!='可用'">{{landDailyState.pmState}}</span><a
-					ng-if="landDailyState.pmState=='可用'">{{landDailyState.pmState}}&nbsp;&nbsp;&nbsp;&nbsp;<span
-						class="glyphicon glyphicon-plus"></span></a></td>
-				<td><span ng-if="landDailyState.nightState!='可用'">{{landDailyState.nightState}}</span><a
-					ng-if="landDailyState.nightState=='可用'">{{landDailyState.nightState}}&nbsp;&nbsp;&nbsp;&nbsp;<span
-						class="glyphicon glyphicon-plus"></span></a></td>
+				<td><span>{{landDailyState.amState}}&nbsp;&nbsp;&nbsp;&nbsp;<a
+						class="no_decoratin" ng-if="landDailyState.amState=='可用'">(申请锁定)</a></span></td>
+				<td><span>{{landDailyState.pmState}}&nbsp;&nbsp;&nbsp;&nbsp;<a
+						class="no_decoratin" ng-if="landDailyState.pmState=='可用'">(申请锁定)</a></span></td>
+				<td><span>{{landDailyState.nightState}}&nbsp;&nbsp;&nbsp;&nbsp;<a
+						class="no_decoratin" ng-if="landDailyState.nightState=='可用'">(申请锁定)</a></span></td>
 			</tr>
 		</tbody>
 	</table>
