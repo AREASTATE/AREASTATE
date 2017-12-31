@@ -1,10 +1,12 @@
-<div class="row area_navbar"></div>
-<div class="row area_mainContent">
-	<div class="col-xs-2 col-md-offset-1 area_mainBorderStyle"
-		style="padding: 0px;">
-		<leftnav items="items"></leftnav>
+<div ng-init="init()">
+	<div class="row area_navbar"></div>
+	<div class="row area_mainContent">
+		<div class="col-xs-2 col-md-offset-1 area_mainBorderStyle"
+			style="padding: 0px;">
+			<leftnav items="items"></leftnav>
+		</div>
+		<div class="col-xs-7 area_content"
+			style="border-left: 9px solid #6d8198" ui-view></div>
 	</div>
-	<div class="col-xs-7 area_content"
-		style="border-left: 9px solid #6d8198" ui-view></div>
 </div>
 

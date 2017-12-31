@@ -22,8 +22,8 @@ public class LandStateCreaterController {
     
     @RequestMapping(value="/getLandDailyState",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public List<LandDailyState> getLandDailyState(@RequestParam("land") String land,HttpServletRequest request){
-    	return this.landStateCreaterService.getLandDailyState("",request);
+    public List<LandDailyState> getLandDailyState(@RequestParam("landId") Integer landId,HttpServletRequest request){
+    	return this.landStateCreaterService.getLandDailyState(landId,request);
     }
     
 }

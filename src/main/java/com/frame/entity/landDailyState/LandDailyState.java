@@ -2,9 +2,11 @@ package com.frame.entity.landDailyState;
 
 import java.util.Date;
 
+import com.frame.entity.land.Land;
+
 public class LandDailyState {
 	
-	public String land;
+	public Land land;
 	
 	public String amState;
 	
@@ -13,14 +15,6 @@ public class LandDailyState {
 	public String nightState;
 	
 	public Date date;
-
-	public String getLand() {
-		return land;
-	}
-
-	public void setLand(String land) {
-		this.land = land;
-	}
 
 	public String getAmState() {
 		return amState;
@@ -52,5 +46,13 @@ public class LandDailyState {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Land getLand() {
+		return land;
+	}
+
+	public void setLand(Land land) {
+		this.land = land;
 	}
 }

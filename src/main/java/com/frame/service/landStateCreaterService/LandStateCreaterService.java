@@ -7,5 +7,5 @@ import javax.servlet.http.HttpServletRequest;
 import com.frame.entity.landDailyState.LandDailyState;
 
 public interface LandStateCreaterService {
-	List<LandDailyState> getLandDailyState(String land,HttpServletRequest request);
+	List<LandDailyState> getLandDailyState(Integer landId,HttpServletRequest request);
 }

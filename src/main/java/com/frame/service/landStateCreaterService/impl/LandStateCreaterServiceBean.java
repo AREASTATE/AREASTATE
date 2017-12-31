@@ -8,28 +8,36 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.frame.entity.land.Land;
 import com.frame.entity.landDailyState.LandDailyState;
+import com.frame.service.landService.LandService;
 import com.frame.service.landStateCreaterService.LandStateCreaterService;
 
 @Service("landStateCreaterService")
 public class LandStateCreaterServiceBean implements LandStateCreaterService{
+	
+	@Autowired
+	private LandService landService;
 
 	@Override
-	public List<LandDailyState> getLandDailyState(String land,HttpServletRequest request) {
-		return landDailyStateHander(land);
+	public List<LandDailyState> getLandDailyState(Integer landId,HttpServletRequest request) {
+		return landDailyStateHander(landId);
 	}
 
 
 	/**
-	 * TODO:初始化从今天开始到后面15天的用地状态信息s
+	 * TODO:初始化从今天开始到后面15天的用地状态信息
 	 * @return List<LandDailyState>
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LandDailyState> initialLandDailyState(){
+	private List<LandDailyState> initialLandDailyState(Integer landId){
 		ArrayList<LandDailyState> landDailyStates = new ArrayList<LandDailyState>();
+		//用地信息
+		Land land = landService.findLandById(landId, null);
 		//初始化上午、下午、晚上都是可用状态
 		for(int i = 0; i < 5; i ++){
 			Calendar calendar = Calendar.getInstance();
@@ -39,6 +47,7 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 			landDailyState.setAmState("可用");
 			landDailyState.setPmState("可用");
 			landDailyState.setNightState("可用");
+			landDailyState.setLand(land);
 			landDailyStates.add(landDailyState);
 		}
 		return landDailyStates;
@@ -50,7 +59,7 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LandLockApplication> loadMySqlDataOfLandLockApplication(String land){
+	private List<LandLockApplication> loadMySqlDataOfLandLockApplication(Integer landId){
 		String [] stage = {"上午","下午","晚上"};
 
 		String [] state = {"可用","锁定","已分配"};
@@ -63,8 +72,6 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 			int index = (int)(Math.round(Math.random()*2));
 			calendar.add(Calendar.DATE, i);
 			landLockApplication.setDate(calendar.getTime());
-
-			landLockApplication.setLand(land);
 
 			landLockApplication.setDateStage(stage[index]);
 
@@ -81,9 +88,9 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LandDailyState> landDailyStateHander(String land){
-		ArrayList<LandLockApplication> landLockApplications = (ArrayList<LandLockApplication>) loadMySqlDataOfLandLockApplication(land);
-		List<LandDailyState> landDailyStates = initialLandDailyState();
+	private List<LandDailyState> landDailyStateHander(Integer landId){
+		ArrayList<LandLockApplication> landLockApplications = (ArrayList<LandLockApplication>) loadMySqlDataOfLandLockApplication(landId);
+		List<LandDailyState> landDailyStates = initialLandDailyState(landId);
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd"); 
 		for(int i = 0; i < landLockApplications.size(); i ++){
 			for(int j = 0; j < landDailyStates.size(); j ++){
@@ -108,9 +115,13 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	}
 }
 
+/**
+ * @author 李桥
+ * 模拟用地锁定的类，后期替换
+ */
 class LandLockApplication{
 
-	public String land;
+	public Land land;
 	public Date date;
 	public String dateStage;
 	public String lockuser;
@@ -122,12 +133,6 @@ class LandLockApplication{
 	}
 	public void setLandState(String landState) {
 		this.landState = landState;
-	}
-	public String getLand() {
-		return land;
-	}
-	public void setLand(String land) {
-		this.land = land;
 	}
 	public Date getDate() {
 		return date;
@@ -159,4 +164,11 @@ class LandLockApplication{
 	public void setLockDate(Date lockDate) {
 		this.lockDate = lockDate;
 	}
+	public Land getLand() {
+		return land;
+	}
+	public void setLand(Land land) {
+		this.land = land;
+	}
+	
 }

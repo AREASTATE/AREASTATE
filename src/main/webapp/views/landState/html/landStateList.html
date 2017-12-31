@@ -1,7 +1,13 @@
 
 <fieldset ng-init="init()">
+	<div class="row landContainer">
+		<a ng-repeat="land in landList" ng-class="($index == 0) ? 'landAClick':'landAinit'"
+			ng-click="getLandDailyState(land,$event)">{{land.landName}}</a>
+	</div>
 	<table class="table table-bordered">
-		<caption>用地占用情况</caption>
+		<caption>
+			<span style="color: red; font-size: 17px;">{{currentLandName}}</span>占用情况
+		</caption>
 		<thead>
 			<tr>
 				<th>日期</th>
@@ -9,13 +15,19 @@
 				<th>下午</th>
 				<th>晚上</th>
 			</tr>
-		</thead>       
+		</thead>
 		<tbody>
 			<tr ng-repeat="landDailyState in landDailyStates">
 				<td>{{landDailyState.date|date:'yyyy年MM月dd号'}}</td>
-				<td><span ng-if="landDailyState.amState!='可用'">{{landDailyState.amState}}</span><a ng-if="landDailyState.amState=='可用'">{{landDailyState.amState}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></a></td>
-				<td><span ng-if="landDailyState.pmState!='可用'">{{landDailyState.pmState}}</span><a ng-if="landDailyState.pmState=='可用'">{{landDailyState.pmState}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></a></td>
-				<td><span ng-if="landDailyState.nightState!='可用'">{{landDailyState.nightState}}</span><a ng-if="landDailyState.nightState=='可用'">{{landDailyState.nightState}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></a></td>
+				<td><span ng-if="landDailyState.amState!='可用'">{{landDailyState.amState}}</span><a
+					ng-if="landDailyState.amState=='可用'">{{landDailyState.amState}}&nbsp;&nbsp;&nbsp;&nbsp;<span
+						class="glyphicon glyphicon-plus"></span></a></td>
+				<td><span ng-if="landDailyState.pmState!='可用'">{{landDailyState.pmState}}</span><a
+					ng-if="landDailyState.pmState=='可用'">{{landDailyState.pmState}}&nbsp;&nbsp;&nbsp;&nbsp;<span
+						class="glyphicon glyphicon-plus"></span></a></td>
+				<td><span ng-if="landDailyState.nightState!='可用'">{{landDailyState.nightState}}</span><a
+					ng-if="landDailyState.nightState=='可用'">{{landDailyState.nightState}}&nbsp;&nbsp;&nbsp;&nbsp;<span
+						class="glyphicon glyphicon-plus"></span></a></td>
 			</tr>
 		</tbody>
 	</table>

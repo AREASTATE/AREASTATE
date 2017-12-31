@@ -80,14 +80,6 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controller:"mainController",
 			controllerUrl:["../views/main/js/main.js"]
 		}))
-		//mainTable
-		.state("main.mainTable",angularAMD.route({
-			url:"/mainTable/:extrcode/:folderName",
-			templateUrl:"../views/main/html/mainTable.html",
-			controller:'mainTableController',
-			controllerUrl:["../views/main/js/mainTable.js",
-			               "../css/bootstrap/js/bootstrap.min.js"]
-		}))
 		//日志列表
 		.state("main.logList",angularAMD.route({
 			url:"/logList",
@@ -142,7 +134,8 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			templateUrl:"../views/landState/html/landStateList.html",
 			controller:"landStateListController",
 			controllerUrl:["../views/landState/js/landStateList.js",
-			               "../views/landState/js/landStateService.js"]
+			               "../views/landState/js/landStateService.js",
+			               "../views/land/js/landService.js"]
 		}))
 	});
 	return angularAMD.bootstrap(app);

@@ -3,13 +3,13 @@ angular.module("LandStateServiceModule",[])
                              {
 	var landStateService = $resource("../landStateCreaterController/:method", {});
 
-	landStateService.getLandDailyState=function(land,successcb,errorcb)//传入的两个方法
+	landStateService.getLandDailyState=function(landId,successcb,errorcb)//传入的两个方法
 	{
 		$http({
 			method: "POST",
 			headers: {'Content-type': 'application/x-www-form-urlencoded'},
 			url: "../landStateCreaterController/getLandDailyState",
-			data: {'land':land},
+			data: {'landId':landId},
 			transformRequest:function (data) {return $.param(data);}
 		}).success(successcb).error(errorcb);
 	};
