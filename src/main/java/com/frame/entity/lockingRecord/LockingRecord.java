@@ -3,6 +3,7 @@ package com.frame.entity.lockingRecord;
 import java.util.Date;
 
 import com.frame.entity.land.Land;
+import com.frame.entity.user.User;
 
 /**
  * @author chengbangguo
@@ -13,7 +14,7 @@ public class LockingRecord {
 	private Integer id;
 	
 	//申请人
-	private String applicant;
+	private User user;
 	
 	//申请使用日期
 	private Date lockDate;
@@ -26,6 +27,11 @@ public class LockingRecord {
 	
 	//提交时间
 	private Date submitDate;
+	
+	private String state;
+	
+	//用户电话
+	private String userTel;
 
 	public Integer getId() {
 		return id;
@@ -35,12 +41,12 @@ public class LockingRecord {
 		this.id = id;
 	}
 
-	public String getApplicant() {
-		return applicant;
+	public User getUser() {
+		return user;
 	}
 
-	public void setApplicant(String applicant) {
-		this.applicant = applicant;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Date getLockDate() {
@@ -73,6 +79,22 @@ public class LockingRecord {
 
 	public void setSubmitDate(Date submitDate) {
 		this.submitDate = submitDate;
+	}
+
+	public String getUserTel() {
+		return userTel;
+	}
+
+	public void setUserTel(String userTel) {
+		this.userTel = userTel;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 }
 
