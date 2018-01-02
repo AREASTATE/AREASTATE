@@ -52,4 +52,10 @@ public class LandController {
     	return this.landService.findAllLands(request);
     }
     
+    @RequestMapping(value="/findAllLandsByState",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public List<Land> findAllLandsByState(HttpServletRequest request){
+    	return this.landService.findAllLandsByState(request);
+    }
+    
 }
