@@ -51,6 +51,18 @@ angular.module("LockingRecordServiceModule",[])
 			}).success(successcb).error(errorcb);
 		};
 		
+		
+		lockingRecordService.findLockingRecordsByLandId=function(landId,successcb,errorcb)//传入的两个方法
+		{
+			$http({
+				method: "POST",
+				headers: {'Content-type': 'application/x-www-form-urlencoded'},
+				url: "../lockingRecordController/findAllLockingRecords",
+				data: {'id':id},
+                transformRequest:function (data) {return $.param(data);}
+			}).success(successcb).error(errorcb);
+		};
+		
 		return lockingRecordService;
     
 }]);

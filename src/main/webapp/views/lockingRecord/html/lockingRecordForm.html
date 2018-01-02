@@ -5,14 +5,16 @@
 			<label class="col-sm-2 control-label">申请场地</label>
 			<div class="col-sm-4">
 				<select id="landSelect" class="form-control" ng-model="lockingRecord.land">
-					<option ng-repeat="land in lands">{{land.landName}}</option>
+					<option ng-repeat="land in lands" ng-selected="{{$index==0}}" value="{{land}}">
+					{{land.landName}}</option>
 				</select>
 			</div>
 			
 			<label class="col-sm-2 control-label">申请使用日期</label>
 			<div class="col-sm-4">
-				<select id="lockDateSelect" class="form-control" ng-model="lockingRecord.land">
-					<option ng-repeat="lockDate in lockDates">{{lockingRecord.lockDate}}</option>
+				<select id="lockDateSelect" class="form-control" ng-model="lockingRecord.lockDate">
+					<option ng-repeat="lockDate in landDailyStatesDate" ng-selected="{{$index==0}}" value="{{lockDate.date}}">
+					{{lockDate.text}}</option>
 				</select>
 			</div>
 		</div>
@@ -20,8 +22,10 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">申请时间段</label>
 			<div class="col-sm-4">
-				<select id="timeQuantumSelect" class="form-control" ng-model="lockingRecord.land">
-					<option ng-repeat="timeQuantum in timeQuantums">{{lockingRecord.timeQuantum}}</option>
+				<input ng-if="landDailyStatesTimeQuantum.length == 0" class="form-control ng-pristine ng-valid ng-touched" type="text"  value="当天无可用时段" disabled="disabled">
+				<select ng-if="landDailyStatesTimeQuantum.length != 0" id="timeQuantumSelect" class="form-control" ng-model="lockingRecord.timeQuantum">
+					<option ng-repeat="timeQuantum in landDailyStatesTimeQuantum" ng-selected="{{$index==0}}" value="{{timeQuantum}}">
+					{{timeQuantum}}</option>
 				</select>
 			</div>
 		</div>
