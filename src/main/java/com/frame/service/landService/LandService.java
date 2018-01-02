@@ -17,4 +17,6 @@ public interface LandService {
 	Land updateLand(Land land, HttpServletRequest request);
 	
 	List<Land> findAllLands(HttpServletRequest request);
+	
+	List<Land> findAllLandsByState(HttpServletRequest request);
 }

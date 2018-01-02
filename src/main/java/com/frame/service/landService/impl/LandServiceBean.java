@@ -74,6 +74,16 @@ public class LandServiceBean implements LandService{
 		}
 	}
 
+	@Override
+	public List<Land> findAllLandsByState(HttpServletRequest request) {
+		try {
+			return this.landDao.findAllLandsByState();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 //	public void saveLog( HttpServletRequest request,String operation){
 //		try {
 //			Log log = new Log();
