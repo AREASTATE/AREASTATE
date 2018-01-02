@@ -14,4 +14,6 @@ public interface LandDao {
 	Land updateLand(Land Land) throws Exception;
 	
 	public List<Land> findAllLands() throws Exception;
+	
+	public List<Land> findAllLandsByState() throws Exception;
 }

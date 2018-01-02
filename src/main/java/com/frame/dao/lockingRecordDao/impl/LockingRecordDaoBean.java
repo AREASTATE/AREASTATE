@@ -1,8 +1,11 @@
 package com.frame.dao.lockingRecordDao.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +61,16 @@ public class LockingRecordDaoBean implements LockingRecordDao{
 	public List<LockingRecord> findAllLockingRecords() throws Exception {
 		String selectSql = namespace + ".findAllLockingRecords";
 		List<LockingRecord> lockingRecords = this.sqlSessionTemplate.selectList(selectSql);
+		return lockingRecords;
+	}
+
+	@Override
+	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay) {
+		Map paramMap= new HashMap<String, Object>();
+		paramMap.put("landId", landId);
+		paramMap.put("displayDay", displayDay);
+		String selectSql = namespace + ".findLockingRecordsByLandId";
+		List<LockingRecord> lockingRecords = this.sqlSessionTemplate.selectList(selectSql,paramMap);
 		return lockingRecords;
 	}
 	

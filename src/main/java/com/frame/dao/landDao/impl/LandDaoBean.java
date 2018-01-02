@@ -56,5 +56,12 @@ public class LandDaoBean implements LandDao{
 		List<Land> lands = this.sqlSessionTemplate.selectList(selectSql);
 		return lands;
 	}
+
+	@Override
+	public List<Land> findAllLandsByState() throws Exception {
+		String selectSql = namespace + ".findAllLandsByState";
+		List<Land> lands = this.sqlSessionTemplate.selectList(selectSql);
+		return lands;
+	}
 	
 }

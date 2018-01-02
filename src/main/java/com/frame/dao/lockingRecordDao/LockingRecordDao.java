@@ -1,6 +1,9 @@
 package com.frame.dao.lockingRecordDao;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.frame.entity.land.Land;
 import com.frame.entity.lockingRecord.LockingRecord;
@@ -19,5 +22,8 @@ public interface LockingRecordDao {
 	public LockingRecord updateLockingRecord(LockingRecord lockingRecord) throws Exception;
 	
 	public List<LockingRecord> findAllLockingRecords() throws Exception;
+	
+	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay);
+
 }
 
