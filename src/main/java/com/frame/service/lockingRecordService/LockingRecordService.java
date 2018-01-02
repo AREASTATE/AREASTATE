@@ -1,5 +1,6 @@
 package com.frame.service.lockingRecordService;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,5 +21,7 @@ public interface LockingRecordService {
 	public LockingRecord updateLockingRecord(LockingRecord lockingRecord, HttpServletRequest request);
 	
 	public List<LockingRecord> findAllLockingRecords(HttpServletRequest request);
+	
+	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay);
 }
 
