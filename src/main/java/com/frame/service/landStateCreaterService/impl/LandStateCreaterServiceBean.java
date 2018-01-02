@@ -17,6 +17,7 @@ import com.frame.entity.lockingRecord.LockingRecord;
 import com.frame.entity.sysconfig.SysConfig;
 import com.frame.service.landService.LandService;
 import com.frame.service.landStateCreaterService.LandStateCreaterService;
+import com.frame.service.lockingRecordService.LockingRecordService;
 import com.frame.service.sysConfigService.SysConfigService;
 
 @Service("landStateCreaterService")
@@ -26,6 +27,8 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	private LandService landService;
 	@Autowired
 	private SysConfigService sysConfigService;
+	@Autowired
+	private LockingRecordService lockingRecordService;
 
 	@Override
 	public List<LandDailyState> getLandDailyState(Integer landId,HttpServletRequest request) {
@@ -76,8 +79,8 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @time 2017年12月30日
 	 */
 	private List<LockingRecord> loadMySqlDataOfLandLockApplication(Integer landId,Integer displayDay){
-		ArrayList<LockingRecord> lockingRecords = new ArrayList<LockingRecord>();
-		//lockingRecords = findLockingRecordByLandId(landId);
+		List<LockingRecord> lockingRecords = new ArrayList<LockingRecord>();
+		lockingRecords = lockingRecordService.findLockingRecordsByLandId(landId, displayDay);
 		return lockingRecords;
 	}
 
@@ -97,14 +100,14 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 				LandDailyState landDailyState = landDailyStates.get(j);
 				//是当天
 				if(df.format(lockingRecord.getLockDate()).compareTo(df.format(landDailyState.getDate())) == 0){
-					if(lockingRecord.getTimeQuantum() == "上午"){
-						landDailyState.setAmState(lockingRecord.getTimeQuantum());
+					if(lockingRecord.getTimeQuantum().equals("上午")){
+						landDailyState.setAmState(lockingRecord.getState());
 					}
-					if(lockingRecord.getTimeQuantum() == "下午"){
-						landDailyState.setPmState(lockingRecord.getTimeQuantum());
+					if(lockingRecord.getTimeQuantum().equals("下午")){
+						landDailyState.setPmState(lockingRecord.getState());
 					}
-					if(lockingRecord.getTimeQuantum() == "晚上"){
-						landDailyState.setNightState(lockingRecord.getTimeQuantum());
+					if(lockingRecord.getTimeQuantum().equals("晚上")){
+						landDailyState.setNightState(lockingRecord.getState());
 					}
 				}
 			}
