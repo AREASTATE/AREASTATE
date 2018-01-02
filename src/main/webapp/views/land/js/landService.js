@@ -51,6 +51,15 @@ angular.module("LandServiceModule",[])
 			}).success(successcb).error(errorcb);
 		};
 		
+		landService.findAllLandsByState=function(successcb,errorcb)//传入的两个方法
+		{
+			$http({
+				method: "POST",
+				headers: {'Content-type': 'application/x-www-form-urlencoded'},
+				url: "../landController/findAllLandsByState",
+			}).success(successcb).error(errorcb);
+		};
+		
 		return landService;
     
 }]);

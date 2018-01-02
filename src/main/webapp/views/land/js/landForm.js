@@ -10,6 +10,7 @@ controller("landFormController",["$scope","$state","$stateParams","LandService",
 			function suc(data){
 				$scope.land = data;
 			}
+			
 			function ero(error){
 				alert(error);
 			}
