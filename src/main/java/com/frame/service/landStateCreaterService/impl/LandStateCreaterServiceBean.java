@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.frame.entity.land.Land;
 import com.frame.entity.landDailyState.LandDailyState;
+import com.frame.entity.lockingRecord.LockingRecord;
 import com.frame.entity.sysconfig.SysConfig;
 import com.frame.service.landService.LandService;
 import com.frame.service.landStateCreaterService.LandStateCreaterService;
@@ -20,7 +21,7 @@ import com.frame.service.sysConfigService.SysConfigService;
 
 @Service("landStateCreaterService")
 public class LandStateCreaterServiceBean implements LandStateCreaterService{
-	
+
 	@Autowired
 	private LandService landService;
 	@Autowired
@@ -74,27 +75,10 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LandLockApplication> loadMySqlDataOfLandLockApplication(Integer landId,Integer displayDay){
-		String [] stage = {"上午","下午","晚上"};
-
-		String [] state = {"可用","锁定","已分配"};
-
-		ArrayList<LandLockApplication> landLockApplications = new ArrayList<LandLockApplication>();
-
-		for(int i = 0; i < displayDay; i ++){
-			Calendar calendar = Calendar.getInstance();
-			LandLockApplication landLockApplication = new LandLockApplication();
-			int index = (int)(Math.round(Math.random()*2));
-			calendar.add(Calendar.DATE, i);
-			landLockApplication.setDate(calendar.getTime());
-
-			landLockApplication.setDateStage(stage[index]);
-
-			landLockApplication.setLandState(state[index]);
-
-			landLockApplications.add(landLockApplication);
-		}
-		return landLockApplications;
+	private List<LockingRecord> loadMySqlDataOfLandLockApplication(Integer landId,Integer displayDay){
+		ArrayList<LockingRecord> lockingRecords = new ArrayList<LockingRecord>();
+		//lockingRecords = findLockingRecordByLandId(landId);
+		return lockingRecords;
 	}
 
 	/**
@@ -104,86 +88,29 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @time 2017年12月30日
 	 */
 	private List<LandDailyState> landDailyStateHander(Integer landId,Integer displayDay){
-		ArrayList<LandLockApplication> landLockApplications = (ArrayList<LandLockApplication>) loadMySqlDataOfLandLockApplication(landId,displayDay);
+		ArrayList<LockingRecord> lockingRecords = (ArrayList<LockingRecord>) loadMySqlDataOfLandLockApplication(landId,displayDay);
 		List<LandDailyState> landDailyStates = initialLandDailyState(landId,displayDay);
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd"); 
-		for(int i = 0; i < landLockApplications.size(); i ++){
+		for(int i = 0; i < lockingRecords.size(); i ++){
 			for(int j = 0; j < landDailyStates.size(); j ++){
-				LandLockApplication landLockApplication = landLockApplications.get(i);
+				LockingRecord lockingRecord = lockingRecords.get(i);
 				LandDailyState landDailyState = landDailyStates.get(j);
 				//是当天
-				if(df.format(landLockApplication.getDate()).compareTo(df.format(landDailyState.getDate())) == 0){
-					if(landLockApplication.getDateStage() == "上午"){
-						landDailyState.setAmState(landLockApplication.getLandState());
+				if(df.format(lockingRecord.getLockDate()).compareTo(df.format(landDailyState.getDate())) == 0){
+					if(lockingRecord.getTimeQuantum() == "上午"){
+						landDailyState.setAmState(lockingRecord.getTimeQuantum());
 					}
-					if(landLockApplication.getDateStage() == "下午"){
-						landDailyState.setPmState(landLockApplication.getLandState());
+					if(lockingRecord.getTimeQuantum() == "下午"){
+						landDailyState.setPmState(lockingRecord.getTimeQuantum());
 					}
-					if(landLockApplication.getDateStage() == "晚上"){
-						landDailyState.setNightState(landLockApplication.getLandState());
+					if(lockingRecord.getTimeQuantum() == "晚上"){
+						landDailyState.setNightState(lockingRecord.getTimeQuantum());
 					}
 				}
 			}
 		}
-		
+
 		return landDailyStates;
 	}
 }
 
-/**
- * @author 李桥
- * 模拟用地锁定的类，后期替换
- */
-class LandLockApplication{
-
-	public Land land;
-	public Date date;
-	public String dateStage;
-	public String lockuser;
-	public Date lockDate;
-	public String landState;
-
-	public String getLandState() {
-		return landState;
-	}
-	public void setLandState(String landState) {
-		this.landState = landState;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public String getDateStage() {
-		return dateStage;
-	}
-
-	public void setDateStage(String dateStage) {
-		this.dateStage = dateStage;
-	}
-
-	public String getLockuser() {
-		return lockuser;
-	}
-
-	public void setLockuser(String lockuser) {
-		this.lockuser = lockuser;
-	}
-
-	public Date getLockDate() {
-		return lockDate;
-	}
-
-	public void setLockDate(Date lockDate) {
-		this.lockDate = lockDate;
-	}
-	public Land getLand() {
-		return land;
-	}
-	public void setLand(Land land) {
-		this.land = land;
-	}
-	
-}
