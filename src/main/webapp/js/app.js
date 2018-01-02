@@ -176,7 +176,29 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			               "../views/landState/js/landStateService.js",
 			               "../views/land/js/landService.js"]
 		}))
-	});
 /****************************************LandState End****************************************************/
+/****************************************LandState Start****************************************************/
+//状态一览
+		.state("main.lockingRecordForm",angularAMD.route({
+			url:"/lockingRecordForm",
+			templateUrl:"../views/lockingRecord/html/lockingRecordForm.html",
+			controller:"lockingRecordFormController",
+			controllerUrl:["../views/lockingRecord/js/lockingRecordForm.js",
+			               "../views/lockingRecord/js/lockingRecordService.js",
+			               "../views/land/js/landService.js",
+			               "../views/landState/js/landStateService.js"]
+		}))
+/****************************************LandState End****************************************************/
+		/****************************************LandState Start****************************************************/
+		//状态一览
+				.state("main.lockingRecordList",angularAMD.route({
+					url:"/lockingRecordList",
+					templateUrl:"../views/lockingRecord/html/lockingRecordList.html",
+					controller:"lockingRecordListController",
+					controllerUrl:["../views/lockingRecord/js/lockingRecordService.js",
+					               "../views/lockingRecord/js/lockingRecordService.js"]
+				}))
+		/****************************************LandState End****************************************************/
+	});
 	return angularAMD.bootstrap(app);
 });
