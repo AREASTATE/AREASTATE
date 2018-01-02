@@ -1,0 +1,31 @@
+<fieldset ng-init="init()" style="padding: 25px;">
+	<legend style="font-size: 14px;">申请信息录入</legend>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>申请场地</th>
+				<th>申请使用日期</th>
+				<th>申请时间段</th>
+				<th>申请人</th>
+				<th>提交时间</th>
+				<th style="width: 150px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-if="lockingRecordList.length == 0">
+				<td colspan="5"
+					style="text-align: center; height: 100px; line-height: 100px">暂无相关信息</td>
+			</tr>
+			<tr ng-repeat="lockingRecord in lockingRecordList">
+				<td>{{lockingRecord.land}}</td>
+				<td>{{lockingRecord.lockDate}}</td>
+				<td>{{lockingRecord.timeQuantum}}</td>
+				<td>{{lockingRecord.applicant}}</td>
+				<td>{{lockingRecord.submitDate}}</td>
+				<td><a ng-click="displayLockingRecord(lockingRecord.id)">查看</a>&nbsp;&nbsp;&nbsp;<a
+					ng-click="editLockingRecord(lockingRecord.id)">编辑</a>&nbsp;&nbsp;&nbsp;<a
+					ng-click="deleteLockingRecord(lockingRecord.id)">删除</a></td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
