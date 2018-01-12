@@ -33,8 +33,8 @@ public class LockingRecordServiceBean implements LockingRecordService{
 	public LockingRecord saveLockingRecord(LockingRecord lockingRecord,
 			HttpServletRequest request) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		HttpSession session = request.getSession();
 		try {
+			HttpSession session = request.getSession();
 			Object obj = session.getAttribute("user");
 			if(obj instanceof User){
 				User user = (User) obj;
@@ -44,6 +44,8 @@ public class LockingRecordServiceBean implements LockingRecordService{
 				lockingRecord.setSubmitDate(new Date());
 				//设置用户电话
 				lockingRecord.setUserTel(user.getTel());
+				//设置状态
+				lockingRecord.setState("锁定");
 			} else {
 				return null;
 			}
@@ -95,11 +97,39 @@ public class LockingRecordServiceBean implements LockingRecordService{
 			return null;
 		}
 	}
+	
+	@Override
+	public List<LockingRecord> findAllLockingRecordsByUserId(HttpServletRequest request) {
+		try {
+			HttpSession session = request.getSession();
+			Object obj = session.getAttribute("user");
+			if(obj instanceof User){
+				User user = (User) obj;
+				return this.lockingRecordDao.findAllLockingRecordsByUserId(user.getId());
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	@Override
-	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay) {
+	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay, HttpServletRequest request) {
 		try {
 			return this.lockingRecordDao.findLockingRecordsByLandId(landId,displayDay);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public LockingRecord abolishLockingRecord(Integer id, HttpServletRequest request) {
+		try {
+			String state = "已废除";
+			return this.lockingRecordDao.abolishLockingRecord(id,state);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

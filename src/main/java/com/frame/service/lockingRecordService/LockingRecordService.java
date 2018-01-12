@@ -20,8 +20,12 @@ public interface LockingRecordService {
 	
 	public LockingRecord updateLockingRecord(LockingRecord lockingRecord, HttpServletRequest request);
 	
+	public List<LockingRecord> findAllLockingRecordsByUserId(HttpServletRequest request);
+	
 	public List<LockingRecord> findAllLockingRecords(HttpServletRequest request);
 	
-	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay);
+	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay, HttpServletRequest request);
+	
+	public LockingRecord abolishLockingRecord(Integer id, HttpServletRequest request);
 }
 
