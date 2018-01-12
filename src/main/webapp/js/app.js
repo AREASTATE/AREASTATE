@@ -188,16 +188,27 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			               "../views/land/js/landService.js",
 			               "../views/landState/js/landStateService.js"]
 		}))
-/****************************************LandState End****************************************************/
-		/****************************************LandState Start****************************************************/
-		//状态一览
-				.state("main.lockingRecordList",angularAMD.route({
-					url:"/lockingRecordList",
-					templateUrl:"../views/lockingRecord/html/lockingRecordList.html",
-					controller:"lockingRecordListController",
-					controllerUrl:["../views/lockingRecord/js/lockingRecordService.js",
-					               "../views/lockingRecord/js/lockingRecordService.js"]
-				}))
+		.state("main.lockingRecordList",angularAMD.route({
+			url:"/lockingRecordList",
+			templateUrl:"../views/lockingRecord/html/lockingRecordList.html",
+			controller:"lockingRecordListController",
+			controllerUrl:["../views/lockingRecord/js/lockingRecordList.js",
+			               "../views/lockingRecord/js/lockingRecordService.js"]
+		}))
+		.state("main.lockingRecordDisplay",angularAMD.route({
+			url:"/lockingRecordDisplay/:id",
+			templateUrl:"../views/lockingRecord/html/lockingRecordDisplay.html",
+			controller:"lockingRecordDisplayController",
+			controllerUrl:["../views/lockingRecord/js/lockingRecordDisplay.js",
+			               "../views/lockingRecord/js/lockingRecordService.js"]
+		}))
+		.state("main.lockingRecordEditForm",angularAMD.route({
+			url:"/lockingRecordEditForm/:id/:operate",
+			templateUrl:"../views/lockingRecord/html/lockingRecordForm.html",
+			controller:"lockingRecordFormController",
+			controllerUrl:["../views/lockingRecord/js/lockingRecordForm.js",
+			               "../views/lockingRecord/js/lockingRecordService.js"]
+		}))
 		/****************************************LandState End****************************************************/
 	});
 	return angularAMD.bootstrap(app);
