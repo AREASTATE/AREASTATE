@@ -4,7 +4,11 @@
 
 	<insert id="addLockingRecord" parameterType="com.frame.entity.lockingRecord.LockingRecord">
 		insert into
-		LockingRecord(userId,lockDate,timeQuantum,land,state,submitDate) values(#{user.id},#{lockDate},#{timeQuantum},#{land.id},#{state},#{submitDate})
+		LockingRecord(userId,lockDate,timeQuantum,landId,state,submitDate) values(#{user.id},#{lockDate},#{timeQuantum},#{land.id},#{state},#{submitDate})
+	</insert>
+	
+	<insert id="updateLockingRecordState" parameterType="com.frame.entity.lockingRecord.LockingRecord">
+		UPDATE lockingrecord set state = '已过期' where date_sub(now(), INTERVAL 1 DAY) > lockingrecord.lockDate;
 	</insert>
 
 	<insert id="updateLockingRecord" parameterType="com.frame.entity.lockingRecord.LockingRecord">
@@ -19,30 +23,47 @@
 		</set>
 		where LockingRecord.id=#{id}
 	</insert>
+
+	<insert id="abolishLockingRecord" parameterType="hashmap">
+		update lockingRecord
+		<set>
+			<if test="state != null">lockingRecord.state=#{state},</if>
+		</set>
+		where LockingRecord.id=#{id}
+	</insert>
 	
 	<resultMap type="com.frame.entity.lockingRecord.LockingRecord" id="resultListLockingRecord">
 		<id column="id" property="id" />
 		<result column="lockDate" property="lockDate"  javaType="java.util.Date" />
 		<result column="timeQuantum" property="timeQuantum"/>
 		<result column="state" property="state"/>
+		<result column="userTel" property="userTel"/>
 		<result column="submitDate" property="submitDate" javaType="java.util.Date" />
 		<association column="landId" property="land" select="com.frame.dao.landDao.LandMapper.findLandById"></association>
 	</resultMap>
 	
 	<select id="findLockingRecordById" parameterType="Integer"
-		resultType="com.frame.entity.lockingRecord.LockingRecord">
+		resultMap="resultListLockingRecord">
 		SELECT * FROM lockingRecord where lockingRecord.id=#{id}
 	</select>
 	
+	<select id="findAllLockingRecordsByUserId" parameterType="Integer" resultMap="resultListLockingRecord">
+		SELECT * FROM lockingRecord 
+		where lockingrecord.userId = #{userId} 
+		ORDER BY submitDate ASC
+	</select>
+	
 	<select id="findAllLockingRecords" resultMap="resultListLockingRecord">
-		SELECT * FROM lockingRecord ORDER BY inputDate DESC
+		SELECT * FROM lockingRecord ORDER BY submitDate ASC
 	</select>
 	
 	<select id="findLockingRecordsByLandId" parameterType="hashmap" resultMap="resultListLockingRecord">
 		select * from lockingrecord 
 		where lockingrecord.landId = #{landId} 
+		and lockingrecord.state != "已废除"
+		and lockingrecord.state != "已过期"
 		and date_add(now(), INTERVAL #{displayDay} DAY) > lockingrecord.lockDate 
-		and lockingrecord.lockDate > now()
+		and lockingrecord.lockDate > date_sub(now(), INTERVAL 1 DAY)
 	</select>
 	
 	<select id="deleteLockingRecord" parameterType="Integer" resultType="int">

@@ -21,9 +21,15 @@ public interface LockingRecordDao {
 
 	public LockingRecord updateLockingRecord(LockingRecord lockingRecord) throws Exception;
 	
+	public LockingRecord updateLockingRecordState() throws Exception;
+	
 	public List<LockingRecord> findAllLockingRecords() throws Exception;
 	
-	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay);
+	public List<LockingRecord> findAllLockingRecordsByUserId(Integer userId) throws Exception;
+	
+	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay) throws Exception;
+	
+	public LockingRecord abolishLockingRecord(Integer id, String state) throws Exception;
 
 }
 

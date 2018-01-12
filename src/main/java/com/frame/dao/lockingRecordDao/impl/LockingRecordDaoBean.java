@@ -56,6 +56,14 @@ public class LockingRecordDaoBean implements LockingRecordDao{
 		sqlSessionTemplate.insert(addSql, lockingRecord);
 		return null;
 	}
+	
+	@Override
+	public LockingRecord updateLockingRecordState()
+			throws Exception {
+		String addSql = namespace + ".updateLockingRecordState";
+		sqlSessionTemplate.insert(addSql);
+		return null;
+	}
 
 	@Override
 	public List<LockingRecord> findAllLockingRecords() throws Exception {
@@ -65,11 +73,31 @@ public class LockingRecordDaoBean implements LockingRecordDao{
 	}
 
 	@Override
-	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay) {
+	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay)  throws Exception {
 		Map paramMap= new HashMap<String, Object>();
 		paramMap.put("landId", landId);
 		paramMap.put("displayDay", displayDay);
 		String selectSql = namespace + ".findLockingRecordsByLandId";
+		List<LockingRecord> lockingRecords = this.sqlSessionTemplate.selectList(selectSql,paramMap);
+		return lockingRecords;
+	}
+
+	@Override
+	public LockingRecord abolishLockingRecord(Integer id, String state) throws Exception {
+		Map paramMap= new HashMap<String, Object>();
+		paramMap.put("id", id);
+		paramMap.put("state", state);
+		String addSql = namespace + ".abolishLockingRecord";
+		sqlSessionTemplate.insert(addSql, paramMap);
+		return null;
+	}
+
+	@Override
+	public List<LockingRecord> findAllLockingRecordsByUserId(Integer userId) throws Exception {
+		Map paramMap= new HashMap<String, Object>();
+		paramMap.put("userId", userId);
+		String selectSql = namespace + ".findAllLockingRecordsByUserId";
+		updateLockingRecordState();
 		List<LockingRecord> lockingRecords = this.sqlSessionTemplate.selectList(selectSql,paramMap);
 		return lockingRecords;
 	}
