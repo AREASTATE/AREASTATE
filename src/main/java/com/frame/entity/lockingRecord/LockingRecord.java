@@ -28,6 +28,7 @@ public class LockingRecord {
 	//提交时间
 	private Date submitDate;
 	
+	//状态
 	private String state;
 	
 	//用户电话
