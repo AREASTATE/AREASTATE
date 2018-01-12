@@ -33,6 +33,17 @@ angular.module("LockingRecordServiceModule",[])
              }).success(successcb).error(errorcb);
 		};
 		
+		lockingRecordService.abolishLockingRecord=function(id,successcb,errorcb)//传入的两个方法
+		{
+			$http({
+				method: "POST",
+				headers: {'Content-type': 'application/x-www-form-urlencoded'},
+				url: "../lockingRecordController/abolishLockingRecord",
+				data: {'id':id},
+				transformRequest:function (data) {return $.param(data);}
+			}).success(successcb).error(errorcb);
+		};
+		
 		lockingRecordService.updateLockingRecord=function(LockingRecord,successcb,errorcb)//传入的两个方法
 		{
 			 $http({
@@ -48,6 +59,16 @@ angular.module("LockingRecordServiceModule",[])
 				method: "POST",
 				headers: {'Content-type': 'application/x-www-form-urlencoded'},
 				url: "../lockingRecordController/findAllLockingRecords",
+			}).success(successcb).error(errorcb);
+		};
+		
+		
+		lockingRecordService.findAllLockingRecordsByUserId=function(successcb,errorcb)//传入的两个方法
+		{
+			$http({
+				method: "POST",
+				headers: {'Content-type': 'application/x-www-form-urlencoded'},
+				url: "../lockingRecordController/findAllLockingRecordsByUserId",
 			}).success(successcb).error(errorcb);
 		};
 		

@@ -9,13 +9,6 @@ controller("lockingRecordFormController",["$scope","$state","$stateParams","Lock
 		$scope.lands = {};
 		$scope.landDailyStatesDate = [];
 		if($scope.operate == "edit"){
-			LockingRecordService.findLockingRecordById($scope.id,suc,ero);
-			function suc(data){
-				$scope.lockingRecord = data;
-			}
-			function ero(error){
-				alert(error);
-			}
 		}
 		else{
 			//根据状态启用查询所有场地
@@ -41,8 +34,6 @@ controller("lockingRecordFormController",["$scope","$state","$stateParams","Lock
 			$scope.landDailyStatesDate = [];
 			for (var i = 0; i < $scope.landDailyStates.length; i++) {
 				$scope.landDailyStatesDate.push({"text":$scope.fmtDate($scope.landDailyStates[i].date),"date":$scope.landDailyStates[i].date})
-//				$scope.landDailyStatesDate[i].text = $scope.fmtDate($scope.landDailyStates[i].date);
-//				$scope.landDailyStatesDate[i].date = $scope.landDailyStates[i].date;
 			}
 			//绑定默认值
 			$scope.lockingRecord.lockDate = $scope.fmtDate($scope.landDailyStates[0].date);
@@ -75,9 +66,9 @@ controller("lockingRecordFormController",["$scope","$state","$stateParams","Lock
 		if(newValue == oldValue){
 			return;
 		}
-	    var myselect = document.getElementById('landSelect');
-	    var index = myselect.selectedIndex;
-		$scope.getLandDailyState(index);
+		$scope.myselect = document.getElementById('landSelect');
+	    $scope.index = $scope.myselect.selectedIndex;
+		$scope.getLandDailyState($scope.index);
 	});
 	
 	$scope.$watch("lockingRecord.lockDate", function(newValue, oldValue){

@@ -4,9 +4,7 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">申请场地</label>
 			<div class="col-sm-4">
-				<select id="landSelect" class="form-control" ng-model="lockingRecord.land">
-					<option ng-repeat="land in lands" ng-selected="{{$index==0}}" value="{{land}}">
-					{{land.landName}}</option>
+				<select id="landSelect" class="form-control" ng-model="lockingRecord.land" ng-options = "land.landName for land in lands" >
 				</select>
 			</div>
 			

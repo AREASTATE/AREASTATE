@@ -6,7 +6,8 @@
 				<th>申请场地</th>
 				<th>申请使用日期</th>
 				<th>申请时间段</th>
-				<th>申请人</th>
+				<th>联系电话</th>
+				<th>状态</th>
 				<th>提交时间</th>
 				<th style="width: 150px;">操作</th>
 			</tr>
@@ -17,13 +18,14 @@
 					style="text-align: center; height: 100px; line-height: 100px">暂无相关信息</td>
 			</tr>
 			<tr ng-repeat="lockingRecord in lockingRecordList">
-				<td>{{lockingRecord.land}}</td>
+				<td>{{lockingRecord.land.landName}}</td>
 				<td>{{lockingRecord.lockDate}}</td>
 				<td>{{lockingRecord.timeQuantum}}</td>
-				<td>{{lockingRecord.applicant}}</td>
+				<td>{{lockingRecord.userTel}}</td>
+				<td>{{lockingRecord.state}}</td>
 				<td>{{lockingRecord.submitDate}}</td>
 				<td><a ng-click="displayLockingRecord(lockingRecord.id)">查看</a>&nbsp;&nbsp;&nbsp;<a
-					ng-click="editLockingRecord(lockingRecord.id)">编辑</a>&nbsp;&nbsp;&nbsp;<a
+					ng-if='lockingRecord.state != "已废除" && lockingRecord.state != "已过期"' ng-click="abolishLockingRecord(lockingRecord.id)">废除&nbsp;&nbsp;&nbsp;</a><a
 					ng-click="deleteLockingRecord(lockingRecord.id)">删除</a></td>
 			</tr>
 		</tbody>
