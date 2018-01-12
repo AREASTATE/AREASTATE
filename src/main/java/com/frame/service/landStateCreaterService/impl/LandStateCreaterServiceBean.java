@@ -38,10 +38,10 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 			/**
 			 * 默认展示15天状态
 			 */
-			landDailyStates = landDailyStateHander(landId,15);
+			landDailyStates = landDailyStateHander(landId,15,request);
 		}else{
 			Integer displayDay = Integer.parseInt(sysConfig.getValue());
-			landDailyStates = landDailyStateHander(landId,displayDay);
+			landDailyStates = landDailyStateHander(landId,displayDay,request);
 		}
 		return landDailyStates;
 	}
@@ -53,7 +53,7 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LandDailyState> initialLandDailyState(Integer landId,Integer displayDay){
+	private List<LandDailyState> initialLandDailyState(Integer landId,Integer displayDay,HttpServletRequest request){
 		ArrayList<LandDailyState> landDailyStates = new ArrayList<LandDailyState>();
 		//用地信息
 		Land land = landService.findLandById(landId, null);
@@ -78,9 +78,9 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LockingRecord> loadMySqlDataOfLandLockApplication(Integer landId,Integer displayDay){
+	private List<LockingRecord> loadMySqlDataOfLandLockApplication(Integer landId,Integer displayDay,HttpServletRequest request){
 		List<LockingRecord> lockingRecords = new ArrayList<LockingRecord>();
-		lockingRecords = lockingRecordService.findLockingRecordsByLandId(landId, displayDay);
+		lockingRecords = lockingRecordService.findLockingRecordsByLandId(landId, displayDay,request);
 		return lockingRecords;
 	}
 
@@ -90,9 +90,9 @@ public class LandStateCreaterServiceBean implements LandStateCreaterService{
 	 * @author 李桥
 	 * @time 2017年12月30日
 	 */
-	private List<LandDailyState> landDailyStateHander(Integer landId,Integer displayDay){
-		ArrayList<LockingRecord> lockingRecords = (ArrayList<LockingRecord>) loadMySqlDataOfLandLockApplication(landId,displayDay);
-		List<LandDailyState> landDailyStates = initialLandDailyState(landId,displayDay);
+	private List<LandDailyState> landDailyStateHander(Integer landId,Integer displayDay,HttpServletRequest request){
+		ArrayList<LockingRecord> lockingRecords = (ArrayList<LockingRecord>) loadMySqlDataOfLandLockApplication(landId,displayDay,request);
+		List<LandDailyState> landDailyStates = initialLandDailyState(landId,displayDay,request);
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd"); 
 		for(int i = 0; i < lockingRecords.size(); i ++){
 			for(int j = 0; j < landDailyStates.size(); j ++){
