@@ -56,5 +56,17 @@ public class lockingRecordController {
     public List<LockingRecord> findAllLockingRecords(HttpServletRequest request){
     	return this.lockingRecordService.findAllLockingRecords(request);
     }
+    
+    @RequestMapping(value="/findAllLockingRecordsByUserId",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public List<LockingRecord> findAllLockingRecordsByUserId(HttpServletRequest request){
+    	return this.lockingRecordService.findAllLockingRecordsByUserId(request);
+    }
+    
+    @RequestMapping(value="/abolishLockingRecord",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public LockingRecord abolishLockingRecord(@RequestParam("id") Integer id,HttpServletRequest request){
+    	return this.lockingRecordService.abolishLockingRecord(id,request);
+    }
 }
 
