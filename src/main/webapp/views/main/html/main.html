@@ -1,11 +1,25 @@
 <div ng-init="init()">
-	<div class="row area_navbar"></div>
+	<div class="row area_navbar">
+		<div class="col-xs-2 systemtitle">
+			活动中心查询系统</div>
+		<div class="col-xs-8" style="height: 60px; line-height: 60px;">
+			<ul class="nav_ul">
+				<li>系统配置</li>
+				<li>用地管理</li>
+				<li>个人中心</li>
+			</ul>
+		</div>
+		<div class="col-xs-2">
+			<span id="fusmal" class="userno" >欢迎用户{{usr.loginNo}}</span>&nbsp;&nbsp;
+				<span class="signout" ng-click="loginOut()">退出</span>
+		</div>
+	</div>
 	<div class="row area_mainContent">
-		<div class="col-xs-2 col-md-offset-1 area_mainBorderStyle"
+		<div id="leftnav" class="col-xs-2 area_mainBorderStyle"
 			style="padding: 0px;">
 			<leftnav items="items"></leftnav>
 		</div>
-		<div class="col-xs-7 area_content"
+		<div id="rightcontent" class="col-xs-10 area_content"
 			style="border-left: 9px solid #6d8198" ui-view></div>
 	</div>
 </div>

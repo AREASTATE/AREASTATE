@@ -78,7 +78,8 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			url:"/main",
 			templateUrl:"../views/main/html/main.html",
 			controller:"mainController",
-			controllerUrl:["../views/main/js/main.js"]
+			controllerUrl:["../views/main/js/main.js",
+			               "../views/login_register/js/login_registerService.js"]
 		}))
 		//日志列表
 		.state("main.logList",angularAMD.route({
@@ -91,7 +92,7 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 /****************************************PersonnalCenter Start****************************************************/
 		//个人中心
 		.state("main.personnalCenter",angularAMD.route({
-			url:"/personnalCenter/:id",
+			url:"/personnalCenter",
 			templateUrl:"../views/personnal/html/personnalCenter.html",
 			controller:"personnalCenterController",
 			controllerUrl:["../views/personnal/js/personnalCenter.js",
@@ -174,10 +175,11 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controller:"landStateListController",
 			controllerUrl:["../views/landState/js/landStateList.js",
 			               "../views/landState/js/landStateService.js",
-			               "../views/land/js/landService.js"]
+			               "../views/land/js/landService.js",
+			               "../views/lockingRecord/js/lockingRecordService.js"]
 		}))
 /****************************************LandState End****************************************************/
-/****************************************LandState Start****************************************************/
+/****************************************lockingRecord Start****************************************************/
 //状态一览
 		.state("main.lockingRecordForm",angularAMD.route({
 			url:"/lockingRecordForm",
@@ -209,7 +211,21 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/lockingRecord/js/lockingRecordForm.js",
 			               "../views/lockingRecord/js/lockingRecordService.js"]
 		}))
-		/****************************************LandState End****************************************************/
+		/****************************************lockingRecord End****************************************************/
+		.state("main.landAssignedAndReliveList",angularAMD.route({
+			url:"/landAssignedAndReliveList",
+			templateUrl:"../views/landAssignedAndRelive/html/landAssignedAndReliveList.html",
+			controller:"landAssignedAndReliveListController",
+			controllerUrl:["../views/landAssignedAndRelive/js/landAssignedAndReliveList.js",
+			               "../views/lockingRecord/js/lockingRecordService.js"]
+		}))
+		.state("main.landAssignedAndReliveDisplay",angularAMD.route({
+			url:"/landAssignedAndReliveDisplay/:id",
+			templateUrl:"../views/landAssignedAndRelive/html/landAssignedAndReliveDisplay.html",
+			controller:"landAssignedAndReliveDisplayController",
+			controllerUrl:["../views/landAssignedAndRelive/js/landAssignedAndReliveDisplay.js",
+			               "../views/lockingRecord/js/lockingRecordService.js"]
+		}))
 	});
 	return angularAMD.bootstrap(app);
 });

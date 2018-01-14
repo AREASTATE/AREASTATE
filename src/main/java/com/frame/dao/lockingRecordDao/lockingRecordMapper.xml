@@ -4,7 +4,7 @@
 
 	<insert id="addLockingRecord" parameterType="com.frame.entity.lockingRecord.LockingRecord">
 		insert into
-		LockingRecord(userId,lockDate,timeQuantum,landId,state,submitDate) values(#{user.id},#{lockDate},#{timeQuantum},#{land.id},#{state},#{submitDate})
+		LockingRecord(userId,lockDate,timeQuantum,landId,state,submitDate,code) values(#{user.id},#{lockDate},#{timeQuantum},#{land.id},#{state},#{submitDate},#{code})
 	</insert>
 	
 	<insert id="updateLockingRecordState" parameterType="com.frame.entity.lockingRecord.LockingRecord">
@@ -20,11 +20,12 @@
 			<if test="land != null">lockingRecord.land=#{land.id},</if>
 			<if test="state != null">lockingRecord.state=#{state},</if>
 			<if test="submitDate != null">lockingRecord.submitDate=#{submitDate},</if>
+			<if test="code != null">lockingRecord.code=#{code},</if>
 		</set>
 		where LockingRecord.id=#{id}
 	</insert>
 
-	<insert id="abolishLockingRecord" parameterType="hashmap">
+	<insert id="updateLockingRecorderState" parameterType="hashmap">
 		update lockingRecord
 		<set>
 			<if test="state != null">lockingRecord.state=#{state},</if>
@@ -39,7 +40,9 @@
 		<result column="state" property="state"/>
 		<result column="userTel" property="userTel"/>
 		<result column="submitDate" property="submitDate" javaType="java.util.Date" />
+		<result column="code" property="code"/>
 		<association column="landId" property="land" select="com.frame.dao.landDao.LandMapper.findLandById"></association>
+		<association column="userId" property="user" select="com.frame.dao.userDao.UserMapper.findUserById"></association>
 	</resultMap>
 	
 	<select id="findLockingRecordById" parameterType="Integer"

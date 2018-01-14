@@ -33,13 +33,13 @@ angular.module("LockingRecordServiceModule",[])
              }).success(successcb).error(errorcb);
 		};
 		
-		lockingRecordService.abolishLockingRecord=function(id,successcb,errorcb)//传入的两个方法
+		lockingRecordService.updateLockingRecorderState=function(id,state,successcb,errorcb)//传入的两个方法
 		{
 			$http({
 				method: "POST",
 				headers: {'Content-type': 'application/x-www-form-urlencoded'},
-				url: "../lockingRecordController/abolishLockingRecord",
-				data: {'id':id},
+				url: "../lockingRecordController/updateLockingRecorderState",
+				data: {'id':id,'state':state},
 				transformRequest:function (data) {return $.param(data);}
 			}).success(successcb).error(errorcb);
 		};

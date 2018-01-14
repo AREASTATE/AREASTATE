@@ -1,14 +1,14 @@
-angular.module("lockingRecordListModule",[]).
-controller("lockingRecordListController",["$scope","$state","LockingRecordService",function($scope,$state,LockingRecordService){
+angular.module("landAssignedAndReliveListModule",[]).
+controller("landAssignedAndReliveListController",["$scope","$state","LockingRecordService",function($scope,$state,LockingRecordService){
 	
 	$scope.init = function(){
-		LockingRecordService.findAllLockingRecordsByUserId(suc,ero);
+		LockingRecordService.findAllLockingRecords(suc,ero);
 		function suc(data){
 			$scope.lockingRecordList = data;
-			for (var i = 0; i < $scope.lockingRecordList.length; i++) {
+			/*for (var i = 0; i < $scope.lockingRecordList.length; i++) {
 				$scope.lockingRecordList[i].lockDate = $scope.fmtDate($scope.lockingRecordList[i].lockDate);
 				$scope.lockingRecordList[i].submitDate = $scope.fmtDate($scope.lockingRecordList[i].submitDate);
-			}
+			}*/
 		}
 		function ero(error){
 			alert(error);
@@ -29,7 +29,7 @@ controller("lockingRecordListController",["$scope","$state","LockingRecordServic
 	$scope.updateLockingRecorderState = function(id,state){
 		LockingRecordService.updateLockingRecorderState(id,state,suc,ero);
 		function suc(data){
-			alert( "操作生效");
+			alert("操作生效");
 			$scope.init();
 		}
 		function ero(error){
@@ -38,7 +38,7 @@ controller("lockingRecordListController",["$scope","$state","LockingRecordServic
 	}
 	
 	$scope.displayLockingRecord = function(id){
-		$state.go("main.lockingRecordDisplay",{"id":id});
+		$state.go("main.landAssignedAndReliveDisplay",{"id":id});
 	}
 	
 	$scope.deleteLockingRecord = function(id){

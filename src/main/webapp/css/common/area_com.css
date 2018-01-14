@@ -1,10 +1,10 @@
 @CHARSET "UTF-8";
 
 .area_navbar {
-	height: 100px;
-	line-height: 100px;
+	height: 60px;
+	line-height: 60px;
 	text-align: center;
-	background: #61e7d1;
+	background: #23262E; /* #61e7d1; */
 	margin-bottom: 30px;
 }
 
@@ -17,13 +17,8 @@
 }
 
 .area_content {
-	margin-left: 50px;
+	
 }
-
-/* .area_left_nav li {
-	height: 31px;
-	line-height: 30px;
-} */
 
 /*左侧导航栏*/
 .pul {
@@ -38,6 +33,8 @@
 	font-size: 14px;
 	font-weight: 700;
 	cursor: pointer;
+	/* 	background: #23262e;
+    color: white; */
 }
 
 .sli {
@@ -51,7 +48,7 @@
 }
 
 .sli:HOVER {
-	background: #be4708;
+	background: #009688; /* #be4708; */
 	color: white;
 }
 
@@ -103,6 +100,50 @@ landStateList页面
 	float: left;
 }
 
-.no_decoratin{
+.no_decoratin {
 	text-decoration: none !important;
+}
+
+.systemtitle {
+	border-right: 1px solid white;
+	height: 60px;
+	line-height: 60px;
+	color: white;
+	font-size: 22px;
+	user-select: none;
+}
+
+.nav_ul {
+	margin-left: 46px;
+	text-align: left;
+}
+
+.nav_ul li {
+	text-align: center;
+	display: inline-block;
+	width: 100px;
+	color: #b5b0b0;
+	list-style: none;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.nav_ul li:HOVER {
+	color: white;
+	border-bottom: 2px solid #1f2127;
+	background: #353840;
+}
+
+.userno {
+	font-size: 17px;
+	width: 26%;
+	color: white;
+	user-select: none;
+}
+
+.signout {
+	font-size: 17px;
+	width: 26%;
+	color: #ede2e2;
+	cursor: pointer;
 }

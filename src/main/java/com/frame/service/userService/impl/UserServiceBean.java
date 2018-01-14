@@ -40,54 +40,21 @@ public class UserServiceBean implements UserService{
 			user.setEid(System.currentTimeMillis());
 			User existUser = this.userDao.findUserByLoginNo(user.getLoginNo());
 			if(existUser==null){
+				//登陆账号也就是电话
+				user.setTel(user.getLoginNo());
+				user.setRole("user");
 				userDao.saveUser(user);
-				createUserDir(user.getEid()+"");
 				resultMap.put("state", "success");
 				resultMap.put("success", "注册成功！");
 			}else{
 				resultMap.put("state", "error");
 				resultMap.put("error", "该登陆账号已经使用！");
-				System.out.println("该登陆账号已经使用！");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return resultMap;
 	}
-
-	@Override
-	public User updateUser(User user, HttpServletRequest request) {
-		try {
-			userDao.updateUser(user);
-			return user;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	@Override
-	public void deleteUser(Long userId, HttpServletRequest request) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public User findUserById(Long userId, HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User findUserByLoginNo(String loginNo, HttpServletRequest request){
-		try {
-			return this.userDao.findUserByLoginNo(loginNo);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
 	/**
 	 * 验证用户，用户登陆
 	 */
@@ -128,6 +95,40 @@ public class UserServiceBean implements UserService{
 		}
 
 	}
+	
+
+	@Override
+	public User updateUser(User user, HttpServletRequest request) {
+		try {
+			userDao.updateUser(user);
+			return user;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public void deleteUser(Long userId, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public User findUserById(Long userId, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User findUserByLoginNo(String loginNo, HttpServletRequest request){
+		try {
+			return this.userDao.findUserByLoginNo(loginNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	/**
 	 * TODO:简略描述方法需要做什么
@@ -154,41 +155,4 @@ public class UserServiceBean implements UserService{
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * TODO:创建用户文件夹
-	 * @return boolean
-	 * @author AbnerLi
-	 * @time 2017年12月17日
-	 */
-	private boolean createUserDir(String code){
-		boolean flag = false;
-		try {
-			String baseDir = getUserBaseDir();
-			String realUserDir = baseDir + "\\" + code;
-			File folder = new File(realUserDir);
-			if(!folder.exists()){
-				flag = folder.mkdir();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		return flag;
-	}
-
-	/**
-	 * TODO:获取用户基础目录
-	 * @return String
-	 * @author AbnerLi
-	 * @time 2017年12月17日
-	 */
-	private String getUserBaseDir() throws Exception{
-		//Properties properties = ConfigUtil.readConfigs("sysconfig.properties");
-		String userBasePath = PropertyUtil.getProperty("userbasedir");//properties.getProperty("userbasedir");
-		if(userBasePath==null || userBasePath==""){
-			throw new Exception("请在sysconfig.properties文件配置userbasedir(用户文件基础目录)");
-		}
-		return userBasePath;
-	}
-
 }

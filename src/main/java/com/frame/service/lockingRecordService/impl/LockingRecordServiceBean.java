@@ -46,6 +46,7 @@ public class LockingRecordServiceBean implements LockingRecordService{
 				lockingRecord.setUserTel(user.getTel());
 				//设置状态
 				lockingRecord.setState("锁定");
+				lockingRecord.setCode(createCode());
 			} else {
 				return null;
 			}
@@ -126,15 +127,18 @@ public class LockingRecordServiceBean implements LockingRecordService{
 	}
 
 	@Override
-	public LockingRecord abolishLockingRecord(Integer id, HttpServletRequest request) {
+	public LockingRecord updateLockingRecorderState(Integer id,String state, HttpServletRequest request) {
 		try {
-			String state = "已废除";
-			return this.lockingRecordDao.abolishLockingRecord(id,state);
+			return this.lockingRecordDao.updateLockingRecorderState(id,state);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	public String createCode(){
+		String charcat = "0123456789abcdefghigklmnopqrstuvwxyz";
+		return new Date().getTime() + charcat.charAt((int)(Math.random() * charcat.length())) + charcat.charAt((int)(Math.random() * charcat.length())) + "";
+	}
 }
 

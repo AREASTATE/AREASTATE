@@ -33,6 +33,9 @@ public class LockingRecord {
 	
 	//用户电话
 	private String userTel;
+	
+	//编码
+	private String code;
 
 	public Integer getId() {
 		return id;
@@ -97,5 +100,15 @@ public class LockingRecord {
 	public void setState(String state) {
 		this.state = state;
 	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
+	
 }
 

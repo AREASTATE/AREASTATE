@@ -29,7 +29,12 @@ public interface LockingRecordDao {
 	
 	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay) throws Exception;
 	
-	public LockingRecord abolishLockingRecord(Integer id, String state) throws Exception;
+	public LockingRecord updateLockingRecorderState(Integer id, String state) throws Exception;
+
+	List<LockingRecord> getPageList(Integer pageIndex, Integer pageSize)
+			throws Exception;
+
+	int getTotalItems() throws Exception;
 
 }
 

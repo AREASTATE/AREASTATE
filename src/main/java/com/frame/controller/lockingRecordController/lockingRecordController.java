@@ -63,10 +63,10 @@ public class lockingRecordController {
     	return this.lockingRecordService.findAllLockingRecordsByUserId(request);
     }
     
-    @RequestMapping(value="/abolishLockingRecord",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value="/updateLockingRecorderState",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public LockingRecord abolishLockingRecord(@RequestParam("id") Integer id,HttpServletRequest request){
-    	return this.lockingRecordService.abolishLockingRecord(id,request);
+    public LockingRecord updateLockingRecorderState(@RequestParam("id") Integer id,@RequestParam("state") String state,HttpServletRequest request){
+    	return this.lockingRecordService.updateLockingRecorderState(id,state,request);
     }
 }
 

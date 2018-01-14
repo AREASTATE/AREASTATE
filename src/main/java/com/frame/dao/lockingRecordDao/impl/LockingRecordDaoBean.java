@@ -1,11 +1,8 @@
 package com.frame.dao.lockingRecordDao.impl;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,11 +80,11 @@ public class LockingRecordDaoBean implements LockingRecordDao{
 	}
 
 	@Override
-	public LockingRecord abolishLockingRecord(Integer id, String state) throws Exception {
+	public LockingRecord updateLockingRecorderState(Integer id, String state) throws Exception {
 		Map paramMap= new HashMap<String, Object>();
 		paramMap.put("id", id);
 		paramMap.put("state", state);
-		String addSql = namespace + ".abolishLockingRecord";
+		String addSql = namespace + ".updateLockingRecorderState";
 		sqlSessionTemplate.insert(addSql, paramMap);
 		return null;
 	}
@@ -102,5 +99,43 @@ public class LockingRecordDaoBean implements LockingRecordDao{
 		return lockingRecords;
 	}
 	
+	@Override
+	public List<LockingRecord> getPageList(Integer pageIndex,Integer pageSize) throws Exception {
+		Map paramMap= new HashMap<String, Object>();
+		int startIndex = pageSize * (pageIndex - 1);
+		paramMap.put("startIndex", startIndex);
+		paramMap.put("pageSize", pageSize);
+		String selectSql = namespace + ".getPageList";
+		return this.sqlSessionTemplate.selectList(selectSql, paramMap);
+	}
+	
+	@Override
+	public int getTotalItems() throws Exception {
+		Map paramMap= new HashMap<String, Object>();
+		String selectSql = namespace + ".getTotalItems";
+		return this.sqlSessionTemplate.selectOne(selectSql);
+	}
+	
+/*	@Override
+	public List<LockingRecord> getSearchPageList(Integer pageIndex,Integer pageSize,String searchCondition,Integer id) throws Exception {
+		Map paramMap= new HashMap<String, Object>();
+		int startIndex = pageSize * (pageIndex - 1);
+		paramMap.put("startIndex", startIndex);
+		paramMap.put("pageSize", pageSize);
+		paramMap.put("searchCondition", "%" + searchCondition + "%");
+		paramMap.put("user",  id);
+		String selectSql = namespace + ".getSearchPageList";
+		return this.sqlSessionTemplate.selectList(selectSql, paramMap);
+	}
+	
+	@Override
+	public int getSearchTotalItems(String searchCondition,Integer id) throws Exception {
+		Map paramMap= new HashMap<String, Object>();
+		paramMap.put("searchCondition", "%" + searchCondition + "%");
+		paramMap.put("user", id);
+		String selectSql = namespace + ".getSearchTotalItems";
+		return this.sqlSessionTemplate.selectOne(selectSql,paramMap);
+	}
+	*/
 }
 

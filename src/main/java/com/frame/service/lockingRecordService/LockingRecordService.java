@@ -26,6 +26,6 @@ public interface LockingRecordService {
 	
 	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay, HttpServletRequest request);
 	
-	public LockingRecord abolishLockingRecord(Integer id, HttpServletRequest request);
+	public LockingRecord updateLockingRecorderState(Integer id,String state, HttpServletRequest request);
 }
 

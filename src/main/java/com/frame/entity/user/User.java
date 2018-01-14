@@ -19,6 +19,8 @@ public class User {
     
 	private String employeeNo; 
 	
+	private String role;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -89,6 +91,14 @@ public class User {
 
 	public void setEmployeeNo(String employeeNo) {
 		this.employeeNo = employeeNo;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }
