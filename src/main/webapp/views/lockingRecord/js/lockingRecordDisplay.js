@@ -3,14 +3,16 @@ controller("lockingRecordDisplayController",["$scope","$state","$stateParams","L
 	$scope.id = $stateParams.id;
 	
 	$scope.init = function(){
+		$("#loading").modal("show");
 		LockingRecordService.findLockingRecordById($scope.id,suc,ero);
 		function suc(data){
 			$scope.lockingRecord = data;
 			$scope.lockingRecord.lockDate = $scope.fmtDate($scope.lockingRecord.lockDate);
 			$scope.lockingRecord.submitDate = $scope.fmtDate($scope.lockingRecord.submitDate);
+			$("#loading").modal("hide");
 		}
 		function ero(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 		
 	}

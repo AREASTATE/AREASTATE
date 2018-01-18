@@ -136,6 +136,35 @@ public class LockingRecordServiceBean implements LockingRecordService{
 		}
 	}
 
+	@Override
+	public List<LockingRecord> getSearchPageList(Integer pageIndex,Integer pageSize,String searchCondition,Integer id, HttpServletRequest request){
+		try {
+			List<LockingRecord> fileList = this.lockingRecordDao.getSearchPageList(pageIndex, pageSize, searchCondition, id);
+			return fileList;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	@Override
+	public int getSearchTotalItems(String searchCondition,Integer id, HttpServletRequest request){
+		try {
+			int totalItems = this.lockingRecordDao.getSearchTotalItems(searchCondition, id);
+			return totalItems;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	/**
+	 * TODO:生成锁定申请的编码
+	 * @return String
+	 * @author AbnerLi
+	 * @time 2018年1月14日
+	 */
 	public String createCode(){
 		String charcat = "0123456789abcdefghigklmnopqrstuvwxyz";
 		return new Date().getTime() + charcat.charAt((int)(Math.random() * charcat.length())) + charcat.charAt((int)(Math.random() * charcat.length())) + "";

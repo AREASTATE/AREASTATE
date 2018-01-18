@@ -69,6 +69,36 @@
 		and lockingrecord.lockDate > date_sub(now(), INTERVAL 1 DAY)
 	</select>
 	
+	<select id="getSearchPageList" resultMap="resultListLockingRecord">
+		SELECT * FROM lockingrecord where lockingrecord.code like binary
+		#{searchCondition} or lockingrecord.lockDate like binary #{searchCondition} or
+		lockingrecord.timeQuantum like binary #{searchCondition}  or
+		lockingrecord.state like binary #{searchCondition} ORDER BY submitDate DESC limit
+		#{startIndex},#{pageSize}
+	</select>
+	<select id="getCurUsrSearchPageList" resultMap="resultListLockingRecord">
+		SELECT * FROM lockingrecord where (lockingrecord.userId=#{user}) and (lockingrecord.code like binary
+		#{searchCondition} or lockingrecord.lockDate like binary #{searchCondition} or
+		lockingrecord.timeQuantum like binary #{searchCondition}  or
+		lockingrecord.state like binary #{searchCondition}) ORDER BY submitDate DESC limit
+		#{startIndex},#{pageSize}
+	</select>	
+	<select id="getSearchTotalItems" resultType="int">
+		SELECT count(1) FROM
+		lockingrecord where lockingrecord.code like binary
+		#{searchCondition} or lockingrecord.lockDate like binary #{searchCondition} or
+		lockingrecord.timeQuantum like binary #{searchCondition}  or
+		lockingrecord.state like binary #{searchCondition}
+	</select>
+		
+	<select id="getCurUsrSearchTotalItems" resultType="int">
+		SELECT count(1) FROM
+		lockingrecord where lockingrecord.userId=#{user} and (lockingrecord.code like binary
+		#{searchCondition} or lockingrecord.lockDate like binary #{searchCondition} or
+		lockingrecord.timeQuantum like binary #{searchCondition}  or
+		lockingrecord.state like binary #{searchCondition}) 
+	</select>
+	
 	<select id="deleteLockingRecord" parameterType="Integer" resultType="int">
 		delete FROM lockingRecord where lockingRecord.id = #{id}
 	</select>

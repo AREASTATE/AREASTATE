@@ -60,4 +60,10 @@ public class UserController {
 		this.userService.loginOut(request);
 	}
 	
+	@RequestMapping(value="/changePwd",method = RequestMethod.POST)
+    @ResponseBody
+	public Map<String,Object> changePwd(@RequestParam("id") Integer id,@RequestParam("oldPwd") String oldPwd,@RequestParam("newPwd") String newPwd, HttpServletRequest request) {
+		return this.userService.changePwd(id,oldPwd,newPwd,request);
+	}
+	
 }

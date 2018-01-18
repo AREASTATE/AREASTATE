@@ -142,17 +142,35 @@ public class UserServiceBean implements UserService{
 		session.invalidate();
 	}
 
-	public void saveLog( HttpServletRequest request,String operation){
+	/**
+	 * TODO:修改密码
+	 * @return Map<String,Object>
+	 * @author AbnerLi
+	 * @time 2018年1月18日
+	 */
+	@Override
+	public Map<String, Object> changePwd(Integer id, String oldPwd,
+			String newPwd, HttpServletRequest request) {
+		Map<String, Object> mesMap = new HashMap<String, Object>();
 		try {
-			Log log = new Log();
-			log.setOperateDate(new Date());
-			log.setOperateUser(((User)request.getSession(false).getAttribute("user")));
-			log.setOperation(operation);
-			//记录日志
-			logDao.saveLog(log);
+			User user = this.userDao.findUserById(id);
+			if(user!=null){
+				if(Md5.getMd5(user.getLoginPwd()).equals(oldPwd)){
+					user.setLoginPwd(newPwd);
+					this.userDao.updateUser(user);
+					mesMap.put("state", true);
+					mesMap.put("mes", "密码修改成功");
+				}
+				else{
+					mesMap.put("state", false);
+					mesMap.put("mes", "原密码输入错误");
+				}
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
+		return mesMap;
 	}
+	
 }

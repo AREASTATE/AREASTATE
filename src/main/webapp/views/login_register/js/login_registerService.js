@@ -42,12 +42,24 @@ angular.module("registerAndLoginModule",[])
                  data: user
              }).success(successcb).error(errorcb);
 		};
+		
 		registerAndLoginService.loginOut=function(successcb,errorcb)//传入的两个方法
 		{
 			 $http({
                  method: "POST",
                  url: "../userController/loginOut",
              }).success(successcb).error(errorcb);
+		};
+		
+		registerAndLoginService.changePwd=function(id,oldpwd,newpwd,successcb,errorcb)//传入的两个方法
+		{
+			 $http({
+                method: "POST",
+                url: "../userController/changePwd",
+                headers: {'Content-type': 'application/x-www-form-urlencoded'},
+                data: {'id':id,"oldPwd":oldpwd,"newPwd":newpwd},
+                transformRequest:function (data) {return $.param(data);}
+            }).success(successcb).error(errorcb);
 		};
 		return registerAndLoginService;
     

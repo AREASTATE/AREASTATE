@@ -2,10 +2,10 @@ angular.module("landStateListModule",["ui.bootstrap"]).
 controller("landStateListController",["$scope","$state","$rootScope","$uibModal","LandStateService","LandService","LockingRecordService",function($scope,$state,$rootScope,$uibModal,LandStateService,LandService,LockingRecordService){
 
 	$scope.init = function(){
+		$("#loading").modal("show");
 		LandService.findAllLands(suc1,ero1);
 		function suc1(data){
 			$scope.landList = data;
-
 			$scope.landAvailable = false;
 			for(var i = 0; i < $scope.landList.length; i ++){
 				if($scope.landList[i].landState == "启用"){
@@ -18,13 +18,14 @@ controller("landStateListController",["$scope","$state","$rootScope","$uibModal"
 			LandStateService.getLandDailyState($scope.landList[0].id,suc2,ero2);
 			function suc2(landDailyStates){
 				$scope.landDailyStates = landDailyStates;
+				$("#loading").modal("hide");
 			}
 			function ero2(error){
-				alert(error);
+				$("#errorhapen").modal("show");
 			}
 		}
 		function ero1(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 	}
 
@@ -36,14 +37,15 @@ controller("landStateListController",["$scope","$state","$rootScope","$uibModal"
 			var ele = $(siblingsEle[i]);
 			ele.attr("class","landAinit");
 		}
-
+		$("#loading").modal("show");
 		$scope.currentLand = land;
 		LandStateService.getLandDailyState(land.id,suc,ero);
 		function suc(data){
 			$scope.landDailyStates = data;
+			$("#loading").modal("hide");
 		}
 		function ero(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 	}
 
@@ -74,13 +76,16 @@ controller("landStateListController",["$scope","$state","$rootScope","$uibModal"
 	};
 
 	$scope.saveLockingRecord = function(){
+		$modalInstance.dismiss('cancel');
+		$("#effectiveing").modal("show");
 		LockingRecordService.saveLockingRecord($scope.lockingRecord,suc,ero);
 		function suc(data){
+			$("#effectiveing").modal("hide");
 			$state.go("main.lockingRecordList");
 		}
 
-		function ero(){
-
+		function ero(error){
+			$("#errorhapen").modal("show");
 		}
 	}
 });

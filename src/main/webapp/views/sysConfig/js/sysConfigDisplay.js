@@ -3,12 +3,14 @@ controller("sysConfigDisplayController",["$scope","$state","$stateParams","SysCo
 	$scope.id = $stateParams.id;
 	
 	$scope.init = function(){
+		$("#loading").modal("show");
 		SysConfigService.findSysConfigById($scope.id,suc,ero);
 		function suc(data){
 			$scope.sysConfig = data;
+			$("#loading").modal("hide");
 		}
 		function ero(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 		
 	}

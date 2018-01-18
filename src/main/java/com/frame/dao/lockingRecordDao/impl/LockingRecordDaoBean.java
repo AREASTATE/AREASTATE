@@ -100,42 +100,36 @@ public class LockingRecordDaoBean implements LockingRecordDao{
 	}
 	
 	@Override
-	public List<LockingRecord> getPageList(Integer pageIndex,Integer pageSize) throws Exception {
-		Map paramMap= new HashMap<String, Object>();
-		int startIndex = pageSize * (pageIndex - 1);
-		paramMap.put("startIndex", startIndex);
-		paramMap.put("pageSize", pageSize);
-		String selectSql = namespace + ".getPageList";
-		return this.sqlSessionTemplate.selectList(selectSql, paramMap);
-	}
-	
-	@Override
-	public int getTotalItems() throws Exception {
-		Map paramMap= new HashMap<String, Object>();
-		String selectSql = namespace + ".getTotalItems";
-		return this.sqlSessionTemplate.selectOne(selectSql);
-	}
-	
-/*	@Override
 	public List<LockingRecord> getSearchPageList(Integer pageIndex,Integer pageSize,String searchCondition,Integer id) throws Exception {
+		String selectSql = namespace;
+		if(id==-1){
+			selectSql += ".getSearchPageList";
+		}
+		else{
+			selectSql += ".getCurUsrSearchPageList";
+		}
 		Map paramMap= new HashMap<String, Object>();
 		int startIndex = pageSize * (pageIndex - 1);
 		paramMap.put("startIndex", startIndex);
 		paramMap.put("pageSize", pageSize);
 		paramMap.put("searchCondition", "%" + searchCondition + "%");
 		paramMap.put("user",  id);
-		String selectSql = namespace + ".getSearchPageList";
 		return this.sqlSessionTemplate.selectList(selectSql, paramMap);
 	}
 	
 	@Override
 	public int getSearchTotalItems(String searchCondition,Integer id) throws Exception {
+		String selectSql = namespace;
+		if(id==-1){
+			selectSql +=  ".getSearchTotalItems";
+		}
+		else{
+			selectSql +=  ".getCurUsrSearchTotalItems";
+		}
 		Map paramMap= new HashMap<String, Object>();
 		paramMap.put("searchCondition", "%" + searchCondition + "%");
 		paramMap.put("user", id);
-		String selectSql = namespace + ".getSearchTotalItems";
 		return this.sqlSessionTemplate.selectOne(selectSql,paramMap);
 	}
-	*/
 }
 

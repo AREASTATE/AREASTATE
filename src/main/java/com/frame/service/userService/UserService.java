@@ -24,4 +24,7 @@ public interface UserService {
 	User updateUser(User user, HttpServletRequest request);
 
 	void loginOut(HttpServletRequest request);
+
+	public Map<String, Object> changePwd(Integer id, String oldPwd,
+			String newPwd, HttpServletRequest request);
 }

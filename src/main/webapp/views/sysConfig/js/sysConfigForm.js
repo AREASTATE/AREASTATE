@@ -6,12 +6,14 @@ controller("sysConfigFormController",["$scope","$state","$stateParams","SysConfi
 	$scope.init = function(){
 		$scope.sysConfig = {};
 		if($scope.operate == "edit"){
+			$("#loading").modal("show");
 			SysConfigService.findSysConfigById($scope.id,suc,ero);
 			function suc(data){
 				$scope.sysConfig = data;
+				$("#loading").modal("hide");
 			}
 			function ero(error){
-				alert(error);
+				$("#errorhapen").modal("show");
 			}
 		}
 	}
@@ -21,6 +23,7 @@ controller("sysConfigFormController",["$scope","$state","$stateParams","SysConfi
 	}
 	
 	$scope.saveSysConfig = function(){
+		$("#effectiveing").modal("show");
 		if($scope.operate=="edit"){
 			SysConfigService.updateSysConfig($scope.sysConfig,suc,ero);
 		}
@@ -29,11 +32,12 @@ controller("sysConfigFormController",["$scope","$state","$stateParams","SysConfi
 			SysConfigService.saveSysConfig($scope.sysConfig,suc,ero);
 		}
 		function suc(data){
+			$("#effectiveing").modal("hide");
 			$state.go("main.sysConfigList");
 		}
 		
-		function ero(){
-			
+		function ero(error){
+			$("#errorhapen").modal("show");
 		}
 	}
 }]);

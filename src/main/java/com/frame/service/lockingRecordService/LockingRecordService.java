@@ -27,5 +27,11 @@ public interface LockingRecordService {
 	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay, HttpServletRequest request);
 	
 	public LockingRecord updateLockingRecorderState(Integer id,String state, HttpServletRequest request);
+
+	public List<LockingRecord> getSearchPageList(Integer pageIndex, Integer pageSize,
+			String searchCondition, Integer id, HttpServletRequest request);
+
+	public int getSearchTotalItems(String searchCondition, Integer id,
+			HttpServletRequest request);
 }
 

@@ -2,12 +2,14 @@ angular.module("sysConfigListModule",[]).
 controller("sysConfigListController",["$scope","$state","SysConfigService",function($scope,$state,SysConfigService){
 	
 	$scope.init = function(){
+		$("#loading").modal("show");
 		SysConfigService.findAllSysConfigs(suc,ero);
 		function suc(data){
 			$scope.sysConfigList = data;
+			$("#loading").modal("hide");
 		}
 		function ero(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 	}
 	
@@ -20,13 +22,14 @@ controller("sysConfigListController",["$scope","$state","SysConfigService",funct
 	}
 	
 	$scope.deleteSysConfig = function(id){
+		$("#effectiveing").modal("show");
 		SysConfigService.deleteSysConfig(id,suc,ero);
 		function suc(data){
-			alert("删除成功");
+			$("#effectiveing").modal("hide");
 			$scope.init();
 		}
 		function ero(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 	}
 }]);

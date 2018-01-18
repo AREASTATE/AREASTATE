@@ -2,12 +2,14 @@ angular.module("landListModule",[]).
 controller("landListController",["$scope","$state","LandService",function($scope,$state,LandService){
 	
 	$scope.init = function(){
+		$("#loading").modal("show");
 		LandService.findAllLands(suc,ero);
 		function suc(data){
 			$scope.landList = data;
+			$("#loading").modal("hide");
 		}
 		function ero(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 	}
 	
@@ -20,13 +22,14 @@ controller("landListController",["$scope","$state","LandService",function($scope
 	}
 	
 	$scope.deleteLand = function(id){
+		$("#effectiveing").modal("show");
 		LandService.deleteLand(id,suc,ero);
 		function suc(data){
-			alert("删除成功");
+			$("#effectiveing").modal("hide");
 			$scope.init();
 		}
 		function ero(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 	}
 }]);

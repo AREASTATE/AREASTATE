@@ -22,7 +22,9 @@ angular.module("mainModule",["ui.bootstrap"])
 		function suc(data){
 			$state.go("login");
 		};
-		function ero(){};
+		function ero(){
+			$("#errorhapen").modal("show");
+		};
 	}
 	
 	//全屏与缩小屏幕
@@ -41,5 +43,11 @@ angular.module("mainModule",["ui.bootstrap"])
 //			$("#leftnav").addClass("col-md-offset-1");
 //			$("#rightcontent").removeClass("col-xs-7").addClass("col-xs-10");
 //		}
+//	}
+	
+//	$scope.innitWindowStyle = function (){
+//		$("#leftnav").css("height",($rootScope.wHeight - 90) + "px");
+//		$("#rightcontent").css("height",($rootScope.wHeight - 90) + "px");
+//		$("#rightcontent").css("overflowY","auto");
 //	}
 }]);

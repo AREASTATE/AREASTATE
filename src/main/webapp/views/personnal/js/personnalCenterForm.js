@@ -1,6 +1,3 @@
-/**
- * 
- */
 angular.module("personnalCenterFormModule",[])
 //这里注入service服务
 .controller("personnalCenterFormController",["$scope","$state","RegisterAndLoginService",function($scope,$state,RegisterAndLoginService){
@@ -16,30 +13,31 @@ angular.module("personnalCenterFormModule",[])
 		//取缓存里面的用户id
 		var user = JSON.parse(localStorage.getItem("currentUser"));
 		if(user){
+			$("#loading").modal("show");
 			RegisterAndLoginService.findUserById(user.id,suc,ero);
 			function suc(data){
 				$scope.currentUser = data;
+				$("#loading").modal("hide");
 			}
 			
 			function ero(error){
-				alert(error);
+				$("#errorhapen").modal("show");
 			}
 		}
 	}
 	/****更新个人信息**/
 	
 	$scope.updateUser=function(){
-		
+		$("#effectiveing").modal("show");
 		RegisterAndLoginService.updateUser($scope.currentUser,suc,err);
-		
 		function suc(data){
 			if(data!=null){
-				alert("修改成功");
+				$("#effectiveing").modal("hide");
 				$state.go("main.personnalCenter");
 			}
 		}
 		function err(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 	}
 	

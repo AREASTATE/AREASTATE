@@ -31,10 +31,11 @@ public interface LockingRecordDao {
 	
 	public LockingRecord updateLockingRecorderState(Integer id, String state) throws Exception;
 
-	List<LockingRecord> getPageList(Integer pageIndex, Integer pageSize)
-			throws Exception;
+	List<LockingRecord> getSearchPageList(Integer pageIndex, Integer pageSize,
+			String searchCondition, Integer id) throws Exception;
 
-	int getTotalItems() throws Exception;
+	int getSearchTotalItems(String searchCondition, Integer id)
+			throws Exception;
 
 }
 

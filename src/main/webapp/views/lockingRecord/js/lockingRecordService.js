@@ -84,6 +84,17 @@ angular.module("LockingRecordServiceModule",[])
 			}).success(successcb).error(errorcb);
 		};
 		
+		lockingRecordService.getSearchPageList=function(pageIndex,pageSize,searchCondition,id,successcb,errorcb)//传入的两个方法
+		{
+			$http({
+				method: "POST",
+				headers: {'Content-type': 'application/x-www-form-urlencoded'},
+				url: "../lockingRecordController/getSearchPageList",
+				data: {'pageIndex':pageIndex,'pageSize':pageSize,"searchCondition":searchCondition,"id":id},
+				transformRequest:function (data) {return $.param(data);}
+			}).success(successcb).error(errorcb);
+		};
+		
 		return lockingRecordService;
     
 }]);

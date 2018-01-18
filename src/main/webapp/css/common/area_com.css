@@ -1,11 +1,14 @@
 @CHARSET "UTF-8";
 
+body{
+    overflow-y: hidden;
+}
 .area_navbar {
 	height: 60px;
 	line-height: 60px;
 	text-align: center;
 	background: #23262E; /* #61e7d1; */
-	margin-bottom: 30px;
+	margin-bottom: 1%;
 }
 
 .area_mainBorderStyle {
@@ -146,4 +149,37 @@ landStateList页面
 	width: 26%;
 	color: #ede2e2;
 	cursor: pointer;
+}
+
+.page_button{
+    height: 24px;
+    line-height: 24px;
+    margin-right: 10px;
+    width: 70px;
+    font-size: 13px;
+}
+
+
+.layui_btn {
+	display: inline-block;
+    height: 30px;
+    margin-left: 10px;
+    line-height: 30px;
+    padding: 0 18px;
+    background-color: #009688;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: .9;
+}
+
+.search_div{
+	text-align: right;
+    height: 35px;
+    line-height: 35px;
+    margin-bottom: 12px;
 }

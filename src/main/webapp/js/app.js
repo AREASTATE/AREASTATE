@@ -4,8 +4,9 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 	var app = angular.module("app",['ui.router','ngResource',"ui.bootstrap.tpls","ui.bootstrap","directiveModel"]);
 
 	//all scope , it can use at any where in the project . by 李桥
-	app.run(["$rootScope","$state","$stateParams",function($rootScope, $state, $stateParams) {
-
+	app.run(["$rootScope","$state","$stateParams","$window",function($rootScope, $state, $stateParams,$window) {
+		//获取浏览器的高度与宽度
+		$rootScope.wHeight = $window.innerHeight;
 	}]);
 
 	/**

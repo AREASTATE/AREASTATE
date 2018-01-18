@@ -9,25 +9,29 @@ controller("lockingRecordFormController",["$scope","$state","$stateParams","Lock
 		$scope.lands = {};
 		$scope.landDailyStatesDate = [];
 		if($scope.operate == "edit"){
+			
 		}
 		else{
+			$("#loading").modal("show");
 			//根据状态启用查询所有场地
 			LandService.findAllLandsByState(suc,ero);
 			function suc(data){
 				$scope.lands = data;
 				//绑定默认值
 				$scope.lockingRecord.land = $scope.lands[0];
+				$("#loading").modal("hide");
 				//默认值
 				$scope.getLandDailyState(0);
 			}
 			function ero(error){
-				alert(error);
+				$("#errorhapen").modal("show");
 			}
 		}
 		
 	}
 	
 	$scope.getLandDailyState = function(number){
+		$("#loading").modal("show");
 		LandStateService.getLandDailyState($scope.lands[number].id,suc,ero);
 		function suc(data){
 			$scope.landDailyStates = data;
@@ -37,11 +41,12 @@ controller("lockingRecordFormController",["$scope","$state","$stateParams","Lock
 			}
 			//绑定默认值
 			$scope.lockingRecord.lockDate = $scope.fmtDate($scope.landDailyStates[0].date);
+			$("#loading").modal("hide");
 			//默认值
 			$scope.getlandDailyStatesTimeQuantum(0);
 		}
 		function ero(error){
-			alert(error);
+			$("#errorhapen").modal("show");
 		}
 	}
 	
@@ -96,6 +101,7 @@ controller("lockingRecordFormController",["$scope","$state","$stateParams","Lock
 	}
 	
 	$scope.saveLockingRecord = function(){
+		$("#effectiveing").modal("show");
 		if($scope.operate=="edit"){
 			LockingRecordService.updateLockingRecord($scope.lockingRecord,suc,ero);
 		}
@@ -103,11 +109,12 @@ controller("lockingRecordFormController",["$scope","$state","$stateParams","Lock
 			LockingRecordService.saveLockingRecord($scope.lockingRecord,suc,ero);
 		}
 		function suc(data){
+			$("#effectiveing").modal("hide");
 			$state.go("main.lockingRecordList");
 		}
 		
 		function ero(){
-			
+			$("#errorhapen").modal("show");
 		}
 	}
 }]);

@@ -1,6 +1,8 @@
 package com.frame.controller.lockingRecordController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -67,6 +69,21 @@ public class lockingRecordController {
     @ResponseBody
     public LockingRecord updateLockingRecorderState(@RequestParam("id") Integer id,@RequestParam("state") String state,HttpServletRequest request){
     	return this.lockingRecordService.updateLockingRecorderState(id,state,request);
+    }
+    
+    @RequestMapping(value="/getSearchPageList",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String,Object> getSearchPageList(@RequestParam(value="pageIndex") Integer pageIndex,@RequestParam(value="pageSize") Integer pageSize,@RequestParam(value="searchCondition") String searchCondition,Integer id, HttpServletRequest request){
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+    	resultMap.put("totalItems", this.lockingRecordService.getSearchTotalItems(searchCondition, id, request));
+    	resultMap.put("pageList", this.lockingRecordService.getSearchPageList(pageIndex, pageSize, searchCondition, id, request));
+    	return resultMap;
+    }
+    
+    @RequestMapping(value="/getSearchTotalItems",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public int getSearchTotalItems(@RequestParam(value="searchCondition") String searchCondition,Integer id, HttpServletRequest request){
+    	return this.lockingRecordService.getSearchTotalItems(searchCondition, id, request);
     }
 }
 
