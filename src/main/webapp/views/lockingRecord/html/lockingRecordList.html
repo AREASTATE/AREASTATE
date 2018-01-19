@@ -37,7 +37,7 @@
 				<td>{{lockingRecord.submitDate|date:'yyyy-MM-dd'}}</td>
 				<td><a ng-click="displayLockingRecord(lockingRecord.id)">查看</a>&nbsp;&nbsp;&nbsp;<a
 					ng-if='lockingRecord.state != "已废除"&&lockingRecord.state != "已过期"&&lockingRecord.state != "已分配"'
-					ng-click="updateLockingRecorderState(lockingRecord.id,'已废除')">废除</a>
+					ng-click="updateLockingRecorderState(lockingRecord.id,'已废除')">解除占用</a>
 			</tr>
 			<tr ng-if="lockingRecordList.length != 0">
 				<td colspan="8"

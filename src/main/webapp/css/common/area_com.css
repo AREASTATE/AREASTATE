@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body{
-    overflow-y: hidden;
+  /*   overflow-y: hidden; */
 }
 .area_navbar {
 	height: 60px;

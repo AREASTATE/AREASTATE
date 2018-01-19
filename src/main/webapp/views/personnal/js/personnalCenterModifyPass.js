@@ -8,7 +8,7 @@ angular.module("personnalCenterModifyPass",[])
 	$scope.newPwd = "";
 	
 	$scope.init = function(){
-		var user=JSON.parse(localStorage.getItem("currentUser"));
+		var user=JSON.parse(sessionStorage.getItem("currentUser"));
 		RegisterAndLoginService.findUserById(user.id,suc,ero);
 		function suc(data){
 			$scope.user = data;

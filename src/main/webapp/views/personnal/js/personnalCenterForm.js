@@ -11,7 +11,7 @@ angular.module("personnalCenterFormModule",[])
 	 */
 	$scope.init = function (){
 		//取缓存里面的用户id
-		var user = JSON.parse(localStorage.getItem("currentUser"));
+		var user = JSON.parse(sessionStorage.getItem("currentUser"));
 		if(user){
 			$("#loading").modal("show");
 			RegisterAndLoginService.findUserById(user.id,suc,ero);

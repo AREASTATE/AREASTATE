@@ -2,7 +2,7 @@ angular.module("personnalModule",[])
 .controller("personnalCenterController",["$scope","$state","RegisterAndLoginService",function($scope,$state,RegisterAndLoginService){
 
 	$scope.init = function(){
-		var user=JSON.parse(localStorage.getItem("currentUser"));
+		var user=JSON.parse(sessionStorage.getItem("currentUser"));
 		$("#loading").modal("show");
 		RegisterAndLoginService.findUserById(user.id,suc,ero);
 		function suc(data){
@@ -15,7 +15,7 @@ angular.module("personnalModule",[])
 	}
 	
 	$scope.changePwd = function(){
-		var user=JSON.parse(localStorage.getItem("currentUser"));
+		var user=JSON.parse(sessionStorage.getItem("currentUser"));
 		if($scope.oldPwd.length < 32){
 			$scope.oldPwd = hex_md5($scope.oldPwd);
 		}

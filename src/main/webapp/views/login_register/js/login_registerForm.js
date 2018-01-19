@@ -17,7 +17,7 @@ controller("login_registeController",["$scope","$state","$cacheFactory","Registe
 				RegisterAndLoginService.checkLoginUser($scope.user,suc,ero);
 				function suc(data, status, headers, config){
 					if(data.state === true){
-						localStorage.setItem("currentUser", JSON.stringify(data.mes));
+						sessionStorage.setItem("currentUser", JSON.stringify(data.mes));
 						$state.go("main");
 					}
 					else{
@@ -47,7 +47,7 @@ controller("login_registeController",["$scope","$state","$cacheFactory","Registe
 		RegisterAndLoginService.checkLoginUser($scope.user,suc,ero);
 		function suc(data, status, headers, config){
 			if(data.state === true){
-				localStorage.setItem("currentUser", JSON.stringify(data.mes));
+				sessionStorage.setItem("currentUser", JSON.stringify(data.mes));
 				$state.go("main");
 			}
 			else{

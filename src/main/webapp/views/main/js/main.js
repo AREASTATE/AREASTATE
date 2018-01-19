@@ -1,7 +1,7 @@
 angular.module("mainModule",["ui.bootstrap"])
 .controller("mainController",["$rootScope","$scope","$state","$uibModal","RegisterAndLoginService",function($rootScope,$scope,$state, $uibModal,RegisterAndLoginService){
 	$scope.init = function(){
-		$rootScope.usr = angular.fromJson(localStorage.getItem("currentUser"));
+		$rootScope.usr = angular.fromJson(sessionStorage.getItem("currentUser"));
 		$scope.items = [{"name":"用地状态一览表","url":"",childItems:[{"name":"用地状态列表","url":"main.landStateList"}]},
 		                {"name":"个人中心","url":"",childItems:[{"name":"个人信息维护","url":"main.personnalCenter"}]},
 		                {"name":"我的用地锁定记录","url":"",childItems:[{"name":"我的用地锁定记录管理","url":"main.lockingRecordList"},{"name":"用地锁定申请","url":"main.lockingRecordForm"}]}];
