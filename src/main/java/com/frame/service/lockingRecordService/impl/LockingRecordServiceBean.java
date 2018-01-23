@@ -1,5 +1,6 @@
 package com.frame.service.lockingRecordService.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +57,38 @@ public class LockingRecordServiceBean implements LockingRecordService{
 			return null;
 		}
 	}
+	
+	@Override
+	public Map<String,Object> saveLockingRecords(ArrayList<LockingRecord> lockingRecords,
+			HttpServletRequest request) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		//获取当前登陆用户
+		User user = (User)request.getSession().getAttribute("user");
+		//提交时间
+		Date submitDate = new Date();
+		//编码
+		String code = createCode();
+		try {
+			for(int i = 0; i < lockingRecords.size(); i ++){
+				LockingRecord lockingRecord = lockingRecords.get(i);
+				//设置当前用户
+				lockingRecord.setUser(user);
+				//设置提交时间
+				lockingRecord.setSubmitDate(submitDate);
+				//设置用户电话
+				lockingRecord.setUserTel(user.getTel());
+				//设置状态
+				lockingRecord.setState("锁定");
+				lockingRecord.setCode(code);
+				lockingRecordDao.saveLockingRecord(lockingRecord);
+			}
+			resultMap.put("code", code);
+			return resultMap;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	@Override
 	public void deleteLockingRecord(Integer id, HttpServletRequest request) {
@@ -71,6 +104,19 @@ public class LockingRecordServiceBean implements LockingRecordService{
 			HttpServletRequest request) {
 		try {
 			return this.lockingRecordDao.findLockingRecordById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+
+	@Override
+	public List<LockingRecord> findLockingRecordByCode(String code,
+			HttpServletRequest request) {
+		try {
+			List<LockingRecord> results = this.lockingRecordDao.findLockingRecordByCode(code);
+			return results;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -127,9 +173,9 @@ public class LockingRecordServiceBean implements LockingRecordService{
 	}
 
 	@Override
-	public LockingRecord updateLockingRecorderState(Integer id,String state, HttpServletRequest request) {
+	public LockingRecord updateLockingRecorderState(String code,String state, HttpServletRequest request) {
 		try {
-			return this.lockingRecordDao.updateLockingRecorderState(id,state);
+			return this.lockingRecordDao.updateLockingRecorderState(code,state);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -139,13 +185,12 @@ public class LockingRecordServiceBean implements LockingRecordService{
 	@Override
 	public List<LockingRecord> getSearchPageList(Integer pageIndex,Integer pageSize,String searchCondition,Integer id, HttpServletRequest request){
 		try {
-			List<LockingRecord> fileList = this.lockingRecordDao.getSearchPageList(pageIndex, pageSize, searchCondition, id);
-			return fileList;
+			List<LockingRecord> results = this.lockingRecordDao.getSearchPageList(pageIndex, pageSize, searchCondition, id);
+			return results;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		
 	}
 	
 	@Override

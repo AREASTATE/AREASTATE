@@ -22,7 +22,7 @@
 				<td>{{sysConfig.value}}</td>
 				<td>{{sysConfig.inputDate|date:'yyyy-MM-dd'}}</td>
 				<td><a ng-click="displaySysConfig(sysConfig.id)">查看</a>&nbsp;&nbsp;&nbsp;<a
-					ng-click="editSysConfig(sysConfig.id)">编辑</a>&nbsp;&nbsp;&nbsp;<a ng-if="sysConfig.property!='展示用地状态数据天数'"
+					ng-click="editSysConfig(sysConfig.id)">编辑</a>&nbsp;&nbsp;&nbsp;<a ng-if="sysConfig.deleteable==true"
 					ng-click="deleteSysConfig(sysConfig.id)">删除</a></td>
 			</tr>
 		</tbody>

@@ -26,6 +26,7 @@ public class SysConfigServiceBean implements SysConfigService{
 	public SysConfig saveSysConfig(SysConfig sysConfig, HttpServletRequest request) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
+			sysConfig.setDeleteable(true);
 			return this.sysConfigDao.saveSysConfig(sysConfig);
 		} catch (Exception e) {
 			e.printStackTrace();

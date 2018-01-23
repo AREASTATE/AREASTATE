@@ -5,7 +5,7 @@ controller("login_registeController",["$scope","$state","$cacheFactory","Registe
 		$state.go("default");
 	}
 
-	$scope.init = function (){
+	$scope.init = function(){
 		$scope.no = "";
 		$scope.pwd = "";
 		console.clear();

@@ -3,7 +3,6 @@ package com.frame.dao.userDao.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -61,6 +60,31 @@ public class UserDaoBean implements UserDao{
 		String selectSql = namespace + ".findUserById";
 		User user = this.sqlSessionTemplate.selectOne(selectSql,paramMap);
 		return user;
+	}
+	
+	/**
+	 * 发布公告
+	 */
+	@Override
+	public boolean publishAnouncementToUser(Integer anouncementId,Integer userId) throws Exception {
+		Map paramMap= new HashMap<String, Object>();
+		paramMap.put("anouncementId", anouncementId);
+		paramMap.put("userId", userId);
+		String updateSql = namespace + ".publishAnouncementToUser";
+		int result = sqlSessionTemplate.update(updateSql,paramMap);
+		return (result > 1);
+	}
+	
+	/**
+	 * 用户阅读公告
+	 */
+	@Override
+	public boolean readedAnouncement(String loginNo) throws Exception {
+		Map paramMap= new HashMap<String, Object>();
+		paramMap.put("loginNo", loginNo);
+		String updateSql = namespace + ".readedAnouncement";
+		int result = sqlSessionTemplate.update(updateSql,paramMap);
+		return (result > 1);
 	}
 	
 }

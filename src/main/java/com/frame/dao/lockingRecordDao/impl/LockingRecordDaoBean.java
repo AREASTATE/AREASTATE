@@ -45,6 +45,15 @@ public class LockingRecordDaoBean implements LockingRecordDao{
 		LockingRecord lockingRecord = this.sqlSessionTemplate.selectOne(selectSql,paramMap);
 		return lockingRecord;
 	}
+	
+	@Override
+	public List<LockingRecord> findLockingRecordByCode(String code) throws Exception {
+		Map paramMap= new HashMap<String, Object>();
+		paramMap.put("code", code);
+		String selectSql = namespace + ".findLockingRecordByCode";
+		List<LockingRecord> results = this.sqlSessionTemplate.selectList(selectSql,paramMap);
+		return results;
+	}
 
 	@Override
 	public LockingRecord updateLockingRecord(LockingRecord lockingRecord)
@@ -78,11 +87,13 @@ public class LockingRecordDaoBean implements LockingRecordDao{
 		List<LockingRecord> lockingRecords = this.sqlSessionTemplate.selectList(selectSql,paramMap);
 		return lockingRecords;
 	}
+	
+	
 
 	@Override
-	public LockingRecord updateLockingRecorderState(Integer id, String state) throws Exception {
+	public LockingRecord updateLockingRecorderState(String code, String state) throws Exception {
 		Map paramMap= new HashMap<String, Object>();
-		paramMap.put("id", id);
+		paramMap.put("code", code);
 		paramMap.put("state", state);
 		String addSql = namespace + ".updateLockingRecorderState";
 		sqlSessionTemplate.insert(addSql, paramMap);

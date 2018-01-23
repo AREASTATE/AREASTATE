@@ -15,16 +15,18 @@ public interface UserService {
 	
 	public User findUserById(Long userId, HttpServletRequest request);
 
-	User findUserByLoginNo(String loginNo, HttpServletRequest request);
+	public User findUserByLoginNo(String loginNo, HttpServletRequest request);
 
-	Map<String, Object> checkLoginUser(User user,HttpServletRequest request);
+	public Map<String, Object> checkLoginUser(User user,HttpServletRequest request);
 
-	User findUserById(Integer id, HttpServletRequest request);
+	public User findUserById(Integer id, HttpServletRequest request);
 
-	User updateUser(User user, HttpServletRequest request);
+	public User updateUser(User user, HttpServletRequest request);
 
-	void loginOut(HttpServletRequest request);
+	public void loginOut(HttpServletRequest request);
 
 	public Map<String, Object> changePwd(Integer id, String oldPwd,
 			String newPwd, HttpServletRequest request);
+
+	public boolean readedAnouncement(String loginNo, HttpServletRequest request);
 }

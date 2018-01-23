@@ -1,5 +1,7 @@
 package com.frame.entity.user;
 
+import com.frame.entity.anouncement.Anouncement;
+
 public class User {
 	private Integer id;
 	
@@ -20,6 +22,8 @@ public class User {
 	private String employeeNo; 
 	
 	private String role;
+	
+	private Anouncement noReadAnouncement;
 	
 	public Integer getId() {
 		return id;
@@ -100,5 +104,12 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
+	public Anouncement getNoReadAnouncement() {
+		return noReadAnouncement;
+	}
+
+	public void setNoReadAnouncement(Anouncement noReadAnouncement) {
+		this.noReadAnouncement = noReadAnouncement;
+	}
 }

@@ -66,4 +66,10 @@ public class UserController {
 		return this.userService.changePwd(id,oldPwd,newPwd,request);
 	}
 	
+	@RequestMapping(value="/readedAnouncement",method = RequestMethod.POST)
+    @ResponseBody
+	public boolean readedAnouncement(@RequestParam("loginNo") String loginNo, HttpServletRequest request){
+		return this.userService.readedAnouncement(loginNo,request);
+	}
+	
 }

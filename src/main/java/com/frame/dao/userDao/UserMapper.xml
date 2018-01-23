@@ -5,8 +5,9 @@
 	<!-- <select id="save" resultType="java.util.Map"> SELECT * FROM class </select> -->
 	<insert id="addUser" parameterType="com.frame.entity.user.User">
 		insert into
-		user(eid,loginNo,loginPwd,email,tel,address,userName,employeeNo,role) values(#{eid},#{loginNo},#{loginPwd},#{email},#{tel},#{address},#{userName},#{employeeNo},#{role})
-	</insert> 
+		user(eid,loginNo,loginPwd,email,tel,address,userName,employeeNo,role,noaReadAnouncementId)
+		values(#{eid},#{loginNo},#{loginPwd},#{email},#{tel},#{address},#{userName},#{employeeNo},#{role},#{noReadAnouncement.id})
+	</insert>
 
 	<insert id="updateUser" parameterType="com.frame.entity.user.User">
 		update user
@@ -22,14 +23,36 @@
 		</set>
 		where user.id=#{id}
 	</insert>
+	
+	<resultMap type="com.frame.entity.user.User"
+		id="resultListUser">
+		<id column="id" property="id" />
+		<result column="eid" property="eid" />
+		<result column="loginNo" property="loginNo" />
+		<result column="loginPwd" property="loginPwd" />
+		<result column="email" property="email" />
+		<result column="tel" property="tel"/>
+		<result column="address" property="address" />
+		<result column="userName" property="userName" />
+		<result column="employeeNo" property="employeeNo" />
+		<association column="noaReadAnouncementId" property="noReadAnouncement"
+			select="com.frame.dao.anouncementDao.AnouncementMapper.findAnouncementById"></association>
+	</resultMap>
 
-	<select id="findUserById" parameterType="Integer"
-		resultType="com.frame.entity.user.User">
+	<select id="findUserById" parameterType="Integer" resultMap="resultListUser">
 		SELECT * FROM user where user.id=#{id}
 	</select>
 
-	<select id="findUserByLoginNo" resultType="com.frame.entity.user.User">
+	<select id="findUserByLoginNo" resultMap="resultListUser">
 		SELECT * FROM user
 		where user.loginNo=#{loginNo}
 	</select>
+	
+	<update id="publishAnouncementToUser" parameterType="Integer">
+		update user set user.noaReadAnouncementId = #{anouncementId} where user.id != #{userId}
+	</update>
+	
+	<update id="readedAnouncement" parameterType="String">
+		update user set user.noaReadAnouncementId = null where user.loginNo = #{loginNo}
+	</update>
 </mapper>

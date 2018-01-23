@@ -5,31 +5,33 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">配置类型</label>
 			<div class="col-sm-4">
-				<select ng-if="operate=='edit'&&sysConfig.property=='展示用地状态数据天数'" id="disabledSelect" required
-					class="form-control" disabled="disabled" ng-model="sysConfig.type">
+				<select ng-if="operate=='edit'&&sysConfig.deleteable==false"
+					id="disabledSelect" required class="form-control"
+					disabled="disabled" ng-model="sysConfig.type">
 					<option>数值型</option>
 					<option>字符型</option>
-				</select>
-				<select ng-if="sysConfig.property!='展示用地状态数据天数'" id="disabledSelect" required
-					class="form-control" ng-model="sysConfig.type">
+				</select> <select ng-if="sysConfig.deleteable!=false"
+					id="disabledSelect" required class="form-control"
+					ng-model="sysConfig.type">
 					<option>数值型</option>
 					<option>字符型</option>
 				</select>
 			</div>
 			<label class="col-sm-2 control-label">键（配置名称）</label>
 			<div class="col-sm-4">
-				<input ng-if="operate=='edit'&&sysConfig.property=='展示用地状态数据天数'"  class="form-control" type="text" disabled="disabled"
-					ng-model="sysConfig.property" placeholder="请输入配置的名称" /> 
-				<input ng-if="sysConfig.property!='展示用地状态数据天数'"
-					class="form-control" type="text" ng-model="sysConfig.property"
-					placeholder="请输入配置的名称" required/>
+				<input ng-if="operate=='edit'&&sysConfig.deleteable==false"
+					class="form-control" type="text" disabled="disabled"
+					ng-model="sysConfig.property" placeholder="请输入配置的名称" /> <input
+					ng-if="sysConfig.deleteable!=false" class="form-control"
+					type="text" ng-model="sysConfig.property" placeholder="请输入配置的名称"
+					required />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label">值（配置值）</label>
 			<div class="col-sm-4">
 				<input class="form-control" type="text" ng-model="sysConfig.value"
-					placeholder="请输入配置值" required/>
+					placeholder="请输入配置值" required />
 			</div>
 		</div>
 		<div class="form-group" style="margin-top: 70px;">

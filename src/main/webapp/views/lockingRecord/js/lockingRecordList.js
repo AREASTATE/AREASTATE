@@ -4,17 +4,10 @@ controller("lockingRecordListController",["$rootScope","$scope","$state","Lockin
 	$scope.currentPage = 1;  
 	$scope.searchCondition = "";
 	$scope.init = function(){
-//		LockingRecordService.findAllLockingRecordsByUserId(suc,ero);
-//		function suc(data){
-//			$scope.lockingRecordList = data;
-//		}
-//		function ero(error){
-//				$("#errorhapen").modal("show");
-//		}
 		$("#loading").modal("show");
 		LockingRecordService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,$rootScope.usr.id,suc,ero);
 		function suc(data){
-			$scope.lockingRecordList = data.pageList;
+			$scope.lockingRecordList = $scope.handData(data.pageList);
 			$scope.totalItems = data.totalItems;  
 			$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 			$("#loading").modal("hide");
@@ -22,6 +15,20 @@ controller("lockingRecordListController",["$rootScope","$scope","$state","Lockin
 		function ero(error){
 			$("#errorhapen").modal("show");
 		}
+	}
+	
+	$scope.handData = function(findedList){
+		for(var i = 0; i < findedList.length; i ++){
+			var mes = findedList[i].timeQuantum.split(",");
+			var handedMes = findedList[i].land.landName + "\n";
+			for(var j = 0; j < mes.length; j ++){
+				handedMes += "\t" + mes[j] + "\t\n";
+			}
+			Object.defineProperty(findedList[i],"mes",{
+				value:handedMes
+			});
+		}
+		return findedList;
 	}
 	
 	/**
@@ -47,8 +54,8 @@ controller("lockingRecordListController",["$rootScope","$scope","$state","Lockin
 		}
 	}
 	
-	$scope.displayLockingRecord = function(id){
-		$state.go("main.lockingRecordDisplay",{"id":id});
+	$scope.displayLockingRecord = function(code){
+		$state.go("main.lockingRecordDisplay",{"code":code});
 	}
 	
 	$scope.deleteLockingRecord = function(id){
@@ -75,7 +82,7 @@ controller("lockingRecordListController",["$rootScope","$scope","$state","Lockin
 			//禁用按钮
 			LockingRecordService.getSearchPageList(++$scope.currentPage,$scope.pageSize,$scope.searchCondition,$rootScope.usr.id,suc,ero);
 			function suc(data){
-				$scope.lockingRecordList = data.pageList;
+				$scope.lockingRecordList = $scope.handData(data.pageList);
 				$scope.totalItems = data.totalItems;  
 				$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 				$("#loading").modal("hide");
@@ -97,7 +104,7 @@ controller("lockingRecordListController",["$rootScope","$scope","$state","Lockin
 			//禁用按钮
 			LockingRecordService.getSearchPageList(--$scope.currentPage,$scope.pageSize,$scope.searchCondition,$rootScope.usr.id,suc,ero);
 			function suc(data){
-				$scope.lockingRecordList = data.pageList;
+				$scope.lockingRecordList = $scope.handData(data.pageList);
 				$scope.totalItems = data.totalItems;  
 				$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 				$("#loading").modal("hide");
@@ -120,7 +127,7 @@ controller("lockingRecordListController",["$rootScope","$scope","$state","Lockin
 		$scope.currentPage=1;
 		LockingRecordService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,$rootScope.usr.id,suc,ero);
 		function suc(data){
-			$scope.lockingRecordList = data.pageList;
+			$scope.lockingRecordList = $scope.handData(data.pageList);
 			$scope.totalItems = data.totalItems;  
 			$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 			$("#loading").modal("hide");
@@ -136,7 +143,7 @@ controller("lockingRecordListController",["$rootScope","$scope","$state","Lockin
 		$scope.currentPage=$scope.totalPage;
 		LockingRecordService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,$rootScope.usr.id,suc,ero);
 		function suc(data){
-			$scope.lockingRecordList = data.pageList;
+			$scope.lockingRecordList = $scope.handData(data.pageList);
 			$scope.totalItems = data.totalItems;  
 			$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 			$("#loading").modal("hide");

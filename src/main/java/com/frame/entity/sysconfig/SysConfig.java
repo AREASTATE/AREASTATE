@@ -24,6 +24,8 @@ public class SysConfig {
 	 * 属性类型（这里仅仅包含两个，字符和数值类型）
 	 */
 	public String type;
+	
+	public boolean deleteable;
 	/**
 	 * 配置日期
 	 */
@@ -58,4 +60,12 @@ public class SysConfig {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public boolean getDeleteable() {
+		return deleteable;
+	}
+	public void setDeleteable(boolean deleteable) {
+		this.deleteable = deleteable;
+	}
+	
+	
 }

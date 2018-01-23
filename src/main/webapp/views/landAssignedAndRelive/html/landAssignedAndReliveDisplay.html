@@ -5,7 +5,7 @@
 			style="cursor: pointer">
 			<span style="padding-left: 15px; font-size: 14px;">基础信息</span>
 		</legend>
-		<div id="baseInfo" class="row collapse in">
+		<div id="baseInfo" class="row collapse in" style="border: 1px solid #f1f1f1; " ng-repeat="lockingRecord in lockingRecords">
 			<div class="form-group col-md-6">
 				<label class="col-md-4 control-label">申请场地</label>
 				<div class="col-md-8 value-display" style="padding-top: 7px;">
@@ -15,7 +15,7 @@
 			<div class="form-group col-md-6">
 				<label class="col-md-4 control-label">使用日期</label>
 				<div class="col-md-8 value-display" style="padding-top: 7px;">
-					<span>{{lockingRecord.lockDate}}</span>
+					<span>{{lockingRecord.lockDate|date:'yyyy-MM-dd'}}</span>
 				</div>
 			</div>
 			<div class="form-group col-md-6">
@@ -39,7 +39,7 @@
 			<div class="form-group col-md-6">
 				<label class="col-md-4 control-label">提交时间</label>
 				<div class="col-md-8 value-display" style="padding-top: 7px;">
-					<span>{{lockingRecord.submitDate}}</span>
+					<span>{{lockingRecord.submitDate|date:'yyyy-MM-dd'}}</span>
 				</div>
 			</div>
 		</div>

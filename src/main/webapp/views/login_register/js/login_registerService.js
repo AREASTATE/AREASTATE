@@ -61,6 +61,17 @@ angular.module("registerAndLoginModule",[])
                 transformRequest:function (data) {return $.param(data);}
             }).success(successcb).error(errorcb);
 		};
+		
+		registerAndLoginService.readedAnouncement=function(loginNo,successcb,errorcb)//传入的两个方法
+		{
+			 $http({
+               method: "POST",
+               url: "../userController/readedAnouncement",
+               headers: {'Content-type': 'application/x-www-form-urlencoded'},
+               data: {'loginNo':loginNo},
+               transformRequest:function (data) {return $.param(data);}
+           }).success(successcb).error(errorcb);
+		};
 		return registerAndLoginService;
     
 }]);

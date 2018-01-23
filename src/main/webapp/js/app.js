@@ -1,12 +1,19 @@
 //采用angularAMD规范写
-define(["angular","angularAMD","allDirective","angular-ui-router","angularResource","angularUIBootstrap","bootstrap"],function(angular,angularAMD){
+define(["angular","angularAMD","allDirective","angular-ui-router","angularResource","angularUIBootstrap","bootstrap","ueditorAll","ueditor",],function(angular,angularAMD){
 	//实例化angularJS
-	var app = angular.module("app",['ui.router','ngResource',"ui.bootstrap.tpls","ui.bootstrap","directiveModel"]);
+	var app = angular.module("app",['ui.router','ngResource',"ui.bootstrap.tpls","ui.bootstrap","directiveModel","ng.ueditor"]);
 
 	//all scope , it can use at any where in the project . by 李桥
 	app.run(["$rootScope","$state","$stateParams","$window",function($rootScope, $state, $stateParams,$window) {
 		//获取浏览器的高度与宽度
 		$rootScope.wHeight = $window.innerHeight;
+//		window.onresize = function () {
+//			$("#leftnav").css("height",($rootScope.wHeight - $("#navb").height()-10) + "px");
+//			$("#rightctex").css("height",($rootScope.wHeight - $("#navb").height()-10) + "px");
+//			/*$scope.$apply(function(){
+//				console.log($window.innerWidth)
+//			})*/
+//		};
 	}]);
 
 	/**
@@ -90,7 +97,7 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/log/js/logList.js",
 			               "../views/log/js/logService.js"],
 		}))
-/****************************************PersonnalCenter Start****************************************************/
+		/****************************************PersonnalCenter Start****************************************************/
 		//个人中心
 		.state("main.personnalCenter",angularAMD.route({
 			url:"/personnalCenter",
@@ -99,8 +106,8 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/personnal/js/personnalCenter.js",
 			               "../views/login_register/js/login_registerService.js"],
 		}))
-/****************************************Personnalcenter End****************************************************/
-/****************************************Land Start****************************************************/
+		/****************************************Personnalcenter End****************************************************/
+		/****************************************Land Start****************************************************/
 		//用地列表
 		.state("main.landList",angularAMD.route({
 			url:"/landList",
@@ -133,8 +140,8 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/land/js/landDisplay.js",
 			               "../views/land/js/landService.js"]
 		}))
-/****************************************Land End****************************************************/
-/****************************************SysConfig Start****************************************************/
+		/****************************************Land End****************************************************/
+		/****************************************SysConfig Start****************************************************/
 		//系统配置咧白哦
 		.state("main.sysConfigList",angularAMD.route({
 			url:"/sysConfigList",
@@ -167,8 +174,8 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/sysConfig/js/sysConfigDisplay.js",
 			               "../views/sysConfig/js/sysConfigService.js"]
 		}))
-/****************************************SysConfig End****************************************************/
-/****************************************LandState Start****************************************************/
+		/****************************************SysConfig End****************************************************/
+		/****************************************LandState Start****************************************************/
 		//状态一览
 		.state("main.landStateList",angularAMD.route({
 			url:"/landStateList",
@@ -179,9 +186,9 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			               "../views/land/js/landService.js",
 			               "../views/lockingRecord/js/lockingRecordService.js"]
 		}))
-/****************************************LandState End****************************************************/
-/****************************************lockingRecord Start****************************************************/
-//状态一览
+		/****************************************LandState End****************************************************/
+		/****************************************lockingRecord Start****************************************************/
+//		状态一览
 		.state("main.lockingRecordForm",angularAMD.route({
 			url:"/lockingRecordForm",
 			templateUrl:"../views/lockingRecord/html/lockingRecordForm.html",
@@ -199,7 +206,7 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			               "../views/lockingRecord/js/lockingRecordService.js"]
 		}))
 		.state("main.lockingRecordDisplay",angularAMD.route({
-			url:"/lockingRecordDisplay/:id",
+			url:"/lockingRecordDisplay/:code",
 			templateUrl:"../views/lockingRecord/html/lockingRecordDisplay.html",
 			controller:"lockingRecordDisplayController",
 			controllerUrl:["../views/lockingRecord/js/lockingRecordDisplay.js",
@@ -221,12 +228,35 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			               "../views/lockingRecord/js/lockingRecordService.js"]
 		}))
 		.state("main.landAssignedAndReliveDisplay",angularAMD.route({
-			url:"/landAssignedAndReliveDisplay/:id",
+			url:"/landAssignedAndReliveDisplay/:code",
 			templateUrl:"../views/landAssignedAndRelive/html/landAssignedAndReliveDisplay.html",
 			controller:"landAssignedAndReliveDisplayController",
 			controllerUrl:["../views/landAssignedAndRelive/js/landAssignedAndReliveDisplay.js",
 			               "../views/lockingRecord/js/lockingRecordService.js"]
 		}))
+		/****************************************anouncement Start****************************************************/
+		.state("main.anouncementAddForm",angularAMD.route({
+			url:"/anouncementAddForm",
+			templateUrl:"../views/anouncement/html/anouncementForm.html",
+			controller:"announcementFormController",
+			controllerUrl:["../views/anouncement/js/anouncementForm.js",
+			               "../views/anouncement/js/anouncementService.js"]
+		}))
+		.state("main.anouncementEditForm",angularAMD.route({
+			url:"/anouncementEditForm/:operate/:id",
+			templateUrl:"../views/anouncement/html/anouncementForm.html",
+			controller:"announcementFormController",
+			controllerUrl:["../views/anouncement/js/anouncementForm.js",
+			               "../views/anouncement/js/anouncementService.js"]
+		}))
+		.state("main.anouncementList",angularAMD.route({
+			url:"/anouncementList",
+			templateUrl:"../views/anouncement/html/anouncementList.html",
+			controller:"anouncementListController",
+			controllerUrl:["../views/anouncement/js/anouncementList.js",
+			               "../views/anouncement/js/anouncementService.js"]
+		}))
+		/****************************************anouncement End****************************************************/
 	});
 	return angularAMD.bootstrap(app);
 });

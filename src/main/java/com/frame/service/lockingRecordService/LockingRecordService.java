@@ -1,7 +1,9 @@
 package com.frame.service.lockingRecordService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,12 +28,18 @@ public interface LockingRecordService {
 	
 	public List<LockingRecord> findLockingRecordsByLandId(Integer landId, Integer displayDay, HttpServletRequest request);
 	
-	public LockingRecord updateLockingRecorderState(Integer id,String state, HttpServletRequest request);
+	public LockingRecord updateLockingRecorderState(String code,String state, HttpServletRequest request);
 
 	public List<LockingRecord> getSearchPageList(Integer pageIndex, Integer pageSize,
 			String searchCondition, Integer id, HttpServletRequest request);
 
 	public int getSearchTotalItems(String searchCondition, Integer id,
+			HttpServletRequest request);
+
+	public Map<String, Object> saveLockingRecords(
+			ArrayList<LockingRecord> lockingRecords, HttpServletRequest request);
+
+	public List<LockingRecord> findLockingRecordByCode(String code,
 			HttpServletRequest request);
 }
 

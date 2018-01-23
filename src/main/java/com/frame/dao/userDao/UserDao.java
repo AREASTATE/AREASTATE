@@ -9,11 +9,13 @@ public interface UserDao {
 	
 	public User findUserById(Long userId) throws Exception;
 
-	User findUserByLoginNo(String loginNo) throws Exception;
+	public User findUserByLoginNo(String loginNo) throws Exception;
 
-	User findUserById(Integer id) throws Exception;
+	public User findUserById(Integer id) throws Exception;
 
-	User updateUser(User user) throws Exception;
-	
-	//public List<User> findUserByCondition(String associateFormId,String associateFormName) throws Exception;
+	public User updateUser(User user) throws Exception;
+
+	public boolean publishAnouncementToUser(Integer anouncementId,Integer userId) throws Exception;
+
+	public boolean readedAnouncement(String loginNo) throws Exception;
 }

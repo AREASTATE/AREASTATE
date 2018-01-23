@@ -14,7 +14,7 @@
 				<th>编码</th>
 				<th>申请场地</th>
 				<th>申请使用日期</th>
-				<th>申请时间段</th>
+				<th style="width:190px">申请时间段</th>
 				<th>联系电话</th>
 				<th>状态</th>
 				<th>提交时间</th>
@@ -27,18 +27,18 @@
 					style="text-align: center; height: 100px; line-height: 100px">暂无相关信息</td>
 			</tr>
 			<tr ng-repeat="lockingRecord in lockingRecordList">
-				<td>{{lockingRecord.code}}</td>
-				<td>{{lockingRecord.land.landName}}</td>
-				<td>{{lockingRecord.lockDate|date:'yyyy-MM-dd'}}</td>
-				<td>{{lockingRecord.timeQuantum}}</td>
-				<td>{{lockingRecord.user.tel}}</td>
-				<td>{{lockingRecord.state}}</td>
-				<td>{{lockingRecord.submitDate|date:'yyyy-MM-dd'}}</td>
-				<td><a ng-click="displayLockingRecord(lockingRecord.id)">查看</a>&nbsp;&nbsp;&nbsp;<a
+				<td title="{{lockingRecord.mes}}">{{lockingRecord.code}}</td>
+				<td title="{{lockingRecord.mes}}">{{lockingRecord.land.landName}}</td>
+				<td title="{{lockingRecord.mes}}">{{lockingRecord.lockDate|date:'yyyy-MM-dd'}}</td>
+				<td class="wrap_td" title="{{lockingRecord.mes}}">{{lockingRecord.timeQuantum}}</td>
+				<td title="{{lockingRecord.mes}}">{{lockingRecord.user.tel}}</td>
+				<td title="{{lockingRecord.mes}}">{{lockingRecord.state}}</td>
+				<td title="{{lockingRecord.mes}}">{{lockingRecord.submitDate|date:'yyyy-MM-dd'}}</td>
+				<td><a ng-click="displayLockingRecord(lockingRecord.code)">查看</a>&nbsp;&nbsp;&nbsp;<a
 					ng-if='lockingRecord.state != "已废除"&&lockingRecord.state != "已分配"&&lockingRecord.state != "已过期"'
-					ng-click="updateLockingRecorderState(lockingRecord.id,'已分配')">分配</a>&nbsp;&nbsp;&nbsp;<a
+					ng-click="updateLockingRecorderState(lockingRecord.code,'已分配')">分配</a>&nbsp;&nbsp;&nbsp;<a
 					ng-if='lockingRecord.state != "已废除"&&lockingRecord.state != "已分配"&&lockingRecord.state != "已过期"'
-					ng-click="updateLockingRecorderState(lockingRecord.id,'已废除')">解除占用</a></td>
+					ng-click="updateLockingRecorderState(lockingRecord.code,'已废除')">解除占用</a></td>
 			</tr>
 			<tr ng-if="lockingRecordList.length != 0">
 				<td colspan="8"

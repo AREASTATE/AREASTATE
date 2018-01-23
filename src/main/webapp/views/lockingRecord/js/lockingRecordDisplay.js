@@ -1,14 +1,14 @@
 angular.module("lockingRecordDisplayModule",[]).
 controller("lockingRecordDisplayController",["$scope","$state","$stateParams","LockingRecordService",function($scope,$state,$stateParams,LockingRecordService){
-	$scope.id = $stateParams.id;
+	$scope.code = $stateParams.code;
 	
 	$scope.init = function(){
 		$("#loading").modal("show");
-		LockingRecordService.findLockingRecordById($scope.id,suc,ero);
+		LockingRecordService.findLockingRecordByCode($scope.code,suc,ero);
 		function suc(data){
-			$scope.lockingRecord = data;
-			$scope.lockingRecord.lockDate = $scope.fmtDate($scope.lockingRecord.lockDate);
-			$scope.lockingRecord.submitDate = $scope.fmtDate($scope.lockingRecord.submitDate);
+			$scope.lockingRecords = data;
+			//$scope.lockingRecord.lockDate = $scope.fmtDate($scope.lockingRecord.lockDate);
+			//$scope.lockingRecord.submitDate = $scope.fmtDate($scope.lockingRecord.submitDate);
 			$("#loading").modal("hide");
 		}
 		function ero(error){

@@ -11,6 +11,15 @@ angular.module("LockingRecordServiceModule",[])
              }).success(successcb).error(errorcb);
 		};
 		
+		lockingRecordService.saveLockingRecords=function(lockingRecords,successcb,errorcb)//传入的两个方法
+		{
+			 $http({
+                 method: "POST",
+                 url: "../lockingRecordController/saveLockingRecords",
+                 data: lockingRecords
+             }).success(successcb).error(errorcb);
+		};
+		
 		lockingRecordService.findLockingRecordById=function(id,successcb,errorcb)//传入的两个方法
 		{
 			 $http({
@@ -18,6 +27,17 @@ angular.module("LockingRecordServiceModule",[])
                  headers: {'Content-type': 'application/x-www-form-urlencoded'},
                  url: "../lockingRecordController/findLockingRecordById",
                  data: {'id':id},
+                 transformRequest:function (data) {return $.param(data);}
+             }).success(successcb).error(errorcb);
+		};
+		
+		lockingRecordService.findLockingRecordByCode=function(code,successcb,errorcb)//传入的两个方法
+		{
+			 $http({
+				 method: "POST",
+                 headers: {'Content-type': 'application/x-www-form-urlencoded'},
+                 url: "../lockingRecordController/findLockingRecordByCode",
+                 data: {'code':code},
                  transformRequest:function (data) {return $.param(data);}
              }).success(successcb).error(errorcb);
 		};
@@ -33,13 +53,13 @@ angular.module("LockingRecordServiceModule",[])
              }).success(successcb).error(errorcb);
 		};
 		
-		lockingRecordService.updateLockingRecorderState=function(id,state,successcb,errorcb)//传入的两个方法
+		lockingRecordService.updateLockingRecorderState=function(code,state,successcb,errorcb)//传入的两个方法
 		{
 			$http({
 				method: "POST",
 				headers: {'Content-type': 'application/x-www-form-urlencoded'},
 				url: "../lockingRecordController/updateLockingRecorderState",
-				data: {'id':id,'state':state},
+				data: {'code':code,'state':state},
 				transformRequest:function (data) {return $.param(data);}
 			}).success(successcb).error(errorcb);
 		};

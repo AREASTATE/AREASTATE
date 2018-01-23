@@ -5,7 +5,7 @@
 				class="glyphicon glyphicon-chevron-right"> </span>
 		</div>
 		<ul class="sul">
-			<li ng-repeat="childItem in item.childItems" class="sli" ng-click="goAim(childItem.url)">{{childItem.name}}</li>
+			<li ng-repeat="childItem in item.childItems" class="sli" ng-click="goAim(childItem.url,$event)">{{childItem.name}}</li>
 		</ul>
 	</li>
 </ul>

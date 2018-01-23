@@ -1,12 +1,7 @@
 package com.frame.service.userService.impl;
 
-import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,12 +12,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.frame.dao.logDao.LogDao;
 import com.frame.dao.userDao.UserDao;
-import com.frame.entity.log.Log;
 import com.frame.entity.user.User;
 import com.frame.service.userService.UserService;
-import com.frame.util.ConfigUtil;
 import com.frame.util.Md5;
-import com.frame.util.PropertyUtil;
 
 @Service("userService")
 @SessionAttributes({"loginNo"}) 
@@ -69,8 +61,8 @@ public class UserServiceBean implements UserService{
 		else if((Md5.getMd5(extU.getLoginPwd())).equals(user.getLoginPwd())){
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", extU);
-			//sesison失效时间15分钟
-			session.setMaxInactiveInterval(15*60);
+			//sesison失效时间30分钟
+			session.setMaxInactiveInterval(30*60);
 			//处理密码
 			extU.setLoginPwd("************");
 			//当前用户
@@ -171,6 +163,16 @@ public class UserServiceBean implements UserService{
 			return null;
 		}
 		return mesMap;
+	}
+	
+	@Override
+	public boolean readedAnouncement(String loginNo, HttpServletRequest request){
+		try {
+			return this.userDao.readedAnouncement(loginNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 }

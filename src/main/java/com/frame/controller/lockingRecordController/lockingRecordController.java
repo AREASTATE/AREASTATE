@@ -1,5 +1,6 @@
 package com.frame.controller.lockingRecordController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +35,24 @@ public class lockingRecordController {
 		return lockingRecordService.saveLockingRecord(lockingRecord,request);
 	}
 	
+	   
+    @RequestMapping(value="/saveLockingRecords",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+	public Map<String,Object> saveLockingRecords(@RequestBody ArrayList<LockingRecord> lockingRecords,
+			HttpServletRequest request) {
+		return this.lockingRecordService.saveLockingRecords(lockingRecords, request);
+	}
+	
 	@RequestMapping(value="/findLockingRecordById",method = RequestMethod.POST)
     @ResponseBody
 	public LockingRecord findLockingRecordById(@RequestParam("id") Integer id, HttpServletRequest request) {
 		return this.lockingRecordService.findLockingRecordById(id,request);
+	}
+	
+	@RequestMapping(value="/findLockingRecordByCode",method = RequestMethod.POST)
+    @ResponseBody
+	public List<LockingRecord> findLockingRecordByCode(@RequestParam("code") String code, HttpServletRequest request) {
+		return this.lockingRecordService.findLockingRecordByCode(code,request);
 	}
 	
 	@RequestMapping(value="/deleteLockingRecord",method = RequestMethod.POST)
@@ -67,8 +82,8 @@ public class lockingRecordController {
     
     @RequestMapping(value="/updateLockingRecorderState",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public LockingRecord updateLockingRecorderState(@RequestParam("id") Integer id,@RequestParam("state") String state,HttpServletRequest request){
-    	return this.lockingRecordService.updateLockingRecorderState(id,state,request);
+    public LockingRecord updateLockingRecorderState(@RequestParam("code") String code,@RequestParam("state") String state,HttpServletRequest request){
+    	return this.lockingRecordService.updateLockingRecorderState(code,state,request);
     }
     
     @RequestMapping(value="/getSearchPageList",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")

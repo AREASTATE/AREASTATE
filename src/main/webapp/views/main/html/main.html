@@ -1,5 +1,5 @@
 <div ng-init="init()">
-	<div class="row area_navbar">
+	<div id="navb" class="row area_navbar">
 		<div class="col-xs-2 systemtitle">活动中心查询系统</div>
 		<div class="col-xs-6" style="height: 60px; line-height: 60px;">
 			<ul class="nav_ul">
@@ -14,21 +14,22 @@
 		<div class="col-xs-1">
 			<span class="signout" ng-click="loginOut()">退出</span>
 		</div>
-	</div> 
+	</div>
 	<div class="row area_mainContent">
-		<div id="leftnav" class="col-xs-2 area_mainBorderStyle"
-			style="padding: 0px;">
+		<div id="leftnav" class="col-xs-2" style="padding: 0px;">
 			<leftnav items="items"></leftnav>
 		</div>
-		<div id="rightcontent" class="col-xs-10 area_content"
-			style="border-left: 9px solid #6d8198" ui-view></div>
+		<div id="rightctex" class="col-xs-10"
+			style="border-left: 9px solid #6d8198; overflow: auto; padding-bottom: 20px;">
+			<div ui-view></div>
+		</div>
 	</div>
 </div>
 
 
-<div class="modal fade bs-example-modal-sm" id="effectiveing" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true"
-	data-backdrop="static">
+<div class="modal fade bs-example-modal-sm" id="effectiveing"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header"
@@ -36,14 +37,15 @@
 				<!--  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
 				<h4 class="modal-title" id="myModalLabel">提示</h4>
 			</div>
-			<div class="modal-body" style="color: #298c57; font-size: 15px; height: 100px; line-height: 70px; text-align: center;">操作生效中。。。。。。。</div>
+			<div class="modal-body"
+				style="color: #298c57; font-size: 15px; height: 100px; line-height: 70px; text-align: center;">操作生效中。。。。。。。</div>
 		</div>
 	</div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" id="effectiveing" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true"
-	data-backdrop="static">
+<div class="modal fade bs-example-modal-sm" id="effectiveing"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header"
@@ -61,32 +63,35 @@
 	data-backdrop="static">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<div class="modal-header" style="background: #575b5a; color: white; border-top-left-radius: 5px; border-top-right-radius: 5px; text-align: center;">
+			<div class="modal-header"
+				style="background: #575b5a; color: white; border-top-left-radius: 5px; border-top-right-radius: 5px; text-align: center;">
 				<!--  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
 				<h4 class="modal-title" id="myModalLabel">友情提示</h4>
 			</div>
-			<div class="modal-body" style="color: #298c57; font-size: 15px; height: 100px; line-height: 70px; text-align: center;">数据加载中。。。。。。。</div>
+			<div class="modal-body"
+				style="color: #298c57; font-size: 15px; height: 100px; line-height: 70px; text-align: center;">数据加载中。。。。。。。</div>
 		</div>
 	</div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" id="effectiveing" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true"
-	data-backdrop="static">
+<div class="modal fade bs-example-modal-sm" id="effectiveing"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header"
 				style="background: #575b5a; color: white; border-top-left-radius: 5px; border-top-right-radius: 5px; text-align: center;">
 				<h4 class="modal-title" id="myModalLabel">友情提示</h4>
 			</div>
-			<div class="modal-body" style="color: #298c57; font-size: 15px; height: 100px; line-height: 70px; text-align: center;">操作生效中。。。。。。。</div>
+			<div class="modal-body"
+				style="color: #298c57; font-size: 15px; height: 100px; line-height: 70px; text-align: center;">操作生效中。。。。。。。</div>
 		</div>
 	</div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" id="errorhapen" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true"
-	data-backdrop="static">
+<div class="modal fade bs-example-modal-sm" id="errorhapen"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header"
@@ -95,7 +100,30 @@
 					aria-hidden="true">×</button>
 				<h4 class="modal-title" id="ero">错误</h4>
 			</div>
-			<div class="modal-body" style="color: #298c57; font-size: 15px; height: 100px; line-height: 70px; text-align: center;">出错啦</div>
+			<div class="modal-body"
+				style="color: #298c57; font-size: 15px; height: 100px; line-height: 70px; text-align: center;">出错啦</div>
 		</div>
 	</div>
 </div>
+
+	<!-- 用户登陆时的公告提示框 -->
+	<div class="modal fade bs-example-modal-sm" id="anouncementWindow"
+		tabindex="-1" role="dialog" aria-labelledby="anouncement"
+		aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header anouncementhead" id="mestype">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="anouncementTitle"></h4>
+				</div>
+				<div class="modal-body" id="anouncementContent"
+					style="padding: 30px;"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" 
+						id="knowthatbtn" ng-click="readedIt()">我知道啦</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
