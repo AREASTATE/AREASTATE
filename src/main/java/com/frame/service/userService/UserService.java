@@ -1,5 +1,6 @@
 package com.frame.service.userService;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,4 +30,13 @@ public interface UserService {
 			String newPwd, HttpServletRequest request);
 
 	public boolean readedAnouncement(String loginNo, HttpServletRequest request);
+
+	public List<User> getSearchPageList(Integer pageIndex, Integer pageSize,
+			String searchCondition, HttpServletRequest request);
+
+	public int getSearchTotalItems(String searchCondition, HttpServletRequest request);
+
+	public Map<String,Object> updateUserRole(Integer id, String role);
+
+	public User findUserByIdWithMesSmall(Integer id);
 }

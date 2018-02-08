@@ -48,7 +48,7 @@ body {
 }
 
 .sli:HOVER {
-	background:#b7e1dd; /* #be4708; #b7e1dd,#009688*/
+	background: #b7e1dd; /* #be4708; #b7e1dd,#009688*/
 	color: white;
 }
 
@@ -114,14 +114,14 @@ landStateList页面
 }
 
 .nav_ul {
-	margin-left: 46px;
 	text-align: left;
 }
 
 .nav_ul li {
+	padding-left: 10px;
+	padding-right: 10px;
 	text-align: center;
 	display: inline-block;
-	width: 100px;
 	color: #b5b0b0;
 	list-style: none;
 	font-size: 16px;
@@ -200,6 +200,19 @@ landStateList页面
 	text-align: center;
 }
 
-.noclickstyle{
-	background:""
+.noclickstyle {
+	background: ""
+}
+
+#rightctex {
+	border-left: 9px solid #6d8198;
+	overflow: auto;
+	padding-bottom: 20px;
+}
+
+.pagetd {
+	height: 24px;
+	line-height: 24px;
+	border: 1px solid #e0e0e0;
+	text-align: right;
 }

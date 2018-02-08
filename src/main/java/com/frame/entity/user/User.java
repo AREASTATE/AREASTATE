@@ -7,7 +7,7 @@ public class User {
 	
 	private Long eid;
 	
-	private String userName;//http.sslVerify=false
+	private String userName;
 	
 	private String address;
 	
@@ -22,6 +22,8 @@ public class User {
 	private String employeeNo; 
 	
 	private String role;
+	
+	private String roleName;
 	
 	private Anouncement noReadAnouncement;
 	
@@ -111,5 +113,13 @@ public class User {
 
 	public void setNoReadAnouncement(Anouncement noReadAnouncement) {
 		this.noReadAnouncement = noReadAnouncement;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 }

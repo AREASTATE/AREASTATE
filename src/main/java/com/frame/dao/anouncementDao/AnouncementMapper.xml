@@ -32,7 +32,7 @@
 		<result column="inputDate" property="inputDate" javaType="java.util.Date" />
 		<result column="publishDate" property="publishDate" javaType="java.util.Date" />
 		<association column="user" property="user"
-			select="com.frame.dao.userDao.UserMapper.findUserById"></association>
+			select="com.frame.dao.userDao.UserMapper.findUserByIdWithMesSmall"></association>
 	</resultMap>
 
 	<select id="findAnouncementById" parameterType="Integer"

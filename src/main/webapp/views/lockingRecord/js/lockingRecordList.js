@@ -31,6 +31,10 @@ controller("lockingRecordListController",["$rootScope","$scope","$state","Lockin
 		return findedList;
 	}
 	
+	$scope.toAddForm = function(){
+		$state.go("main.lockingRecordForm");
+	}
+	
 	/**
 	 * 时间戳转换yyyy--mm--dd
 	 */

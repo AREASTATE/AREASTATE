@@ -41,8 +41,14 @@
 					ng-click="updateLockingRecorderState(lockingRecord.code,'已废除')">解除占用</a></td>
 			</tr>
 			<tr ng-if="lockingRecordList.length != 0">
-				<td colspan="8"
-					style="height: 24px; line-height: 24px; border: 1px solid #e0e0e0; text-align: right;">
+				<td colspan="8" class="pagetd">
+										每页显示
+					<select ng-model="pageSize" ng-change="init()">
+						<option>5</option>
+						<option>10</option>
+						<option>15</option>
+					</select>
+					条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					第<span>{{currentPage}}</span>页&nbsp;&nbsp;共<span>{{totalPage}}</span>页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button class="page_button" ng-click="firstPage()">首页</button>
 					<button class="page_button" ng-click="lastPage()">上一页</button>{{currentPage}}/{{totalPage}}

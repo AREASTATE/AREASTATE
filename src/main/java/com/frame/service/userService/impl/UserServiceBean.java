@@ -1,6 +1,7 @@
 package com.frame.service.userService.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -174,5 +175,68 @@ public class UserServiceBean implements UserService{
 			return false;
 		}
 	}
+	
+	@Override
+	public List<User> getSearchPageList(Integer pageIndex,
+			Integer pageSize, String searchCondition, HttpServletRequest request){
+		try {
+			return this.userDao.getSearchPageList(pageIndex, pageSize, searchCondition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	public int getSearchTotalItems(String searchCondition, HttpServletRequest request){
+		try {
+			int totalItems = this.userDao.getSearchTotalItems(searchCondition);
+			return totalItems;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 1;
+		}
+	}
+	
+	/**
+	 * TODO:分配用户角色
+	 * @return boolean
+	 * @author 李桥
+	 * @time 2018年1月24日
+	 */
+	@Override
+	public Map<String,Object> updateUserRole(Integer id,String role){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			boolean rest = false;
+			if("admin".equals(role)){
+				rest =  this.userDao.updateUserRole(id, role,"管理员");
+			}
+			else{
+				rest =  this.userDao.updateUserRole(id, role,"普通用户");
+			}
+			if(rest){
+				resultMap.put("mes", "分配角色成功");
+			}
+			else{
+				resultMap.put("mes", "分配角色失败");
+			}
+			return resultMap;
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("mes", "分配角色失败");
+			return resultMap;
+		}
+	}
+	
+    @Override
+	public User findUserByIdWithMesSmall(Integer id){
+		try {
+			return this.userDao.findUserByIdWithMesSmall(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+    }
 	
 }

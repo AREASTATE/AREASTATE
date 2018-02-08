@@ -1,7 +1,13 @@
 <fieldset ng-init="init()">
 	<legend style="font-size: 14px;">公告记录</legend>
 	<div class="row search_div">
-		<div class="col-xs-5 col-md-offset-7">
+		<div class="col-xs-2" style="text-align: left;"
+			ng-if="usr.role=='admin'">
+			<button class="layui_btn mgl-20" style="margin-left: 10px;"
+				ng-click="toAddForm()">新建公告</button>
+		</div>
+		<div class="col-xs-2" ng-if="usr.role=='user'"></div>
+		<div class="col-xs-5 col-md-offset-5">
 			<input class="form-control" type="text" ng-model="searchCondition"
 				placeholder="请输入搜索条件"
 				style="width: 40%; display: inline-block; height: 30px;" />
@@ -33,18 +39,21 @@
 				<td>{{anouncement.inputDate|date:'yyyy-MM-dd'}}</td>
 				<td>{{anouncement.anouncementState}}</td>
 				<td>{{anouncement.publishDate|date:'yyyy-MM-dd'}}</td>
-				<td><a ng-click="displayAnouncement(anouncement)">预览</a>&nbsp;&nbsp;&nbsp;<a
+				<td><a ng-click="displayAnouncement(anouncement)">预览</a>&nbsp;&nbsp;<a
 					ng-click="publish(anouncement)"
-					ng-if="anouncement.anouncementState!='已发布'&& usr.role=='admin'">发布</a>&nbsp;&nbsp;&nbsp;<a
+					ng-if="anouncement.anouncementState!='已发布'&& usr.role=='admin' && usr.loginNo==anouncement.user.loginNo">发布</a>&nbsp;&nbsp;<a
 					ng-click="editAnouncement(anouncement.id)"
-					ng-if="usr.role=='admin'">编辑</a>&nbsp;&nbsp;&nbsp;<a
+					ng-if="usr.role=='admin' && usr.loginNo==anouncement.user.loginNo">编辑</a>&nbsp;&nbsp;<a
 					ng-click="deleteAnouncement(anouncement.id)"
-					ng-if="usr.role=='admin'">删除</a></td>
+					ng-if="usr.role=='admin' && usr.loginNo==anouncement.user.loginNo">删除</a></td>
 			</tr>
 			<tr ng-if="anouncementList.length != 0">
-				<td colspan="8"
-					style="height: 24px; line-height: 24px; border: 1px solid #e0e0e0; text-align: right;">
-					第<span>{{currentPage}}</span>页&nbsp;&nbsp;共<span>{{totalPage}}</span>页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<td colspan="8" class="pagetd">
+					每页显示 <select ng-model="pageSize" ng-change="init()">
+						<option>5</option>
+						<option>10</option>
+						<option>15</option>
+				</select> 条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 第<span>{{currentPage}}</span>页&nbsp;&nbsp;共<span>{{totalPage}}</span>页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button class="page_button" ng-click="firstPage()">首页</button>
 					<button class="page_button" ng-click="lastPage()">上一页</button>{{currentPage}}/{{totalPage}}
 					<button class="page_button" ng-click="nextPage()">下一页</button>

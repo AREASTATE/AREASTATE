@@ -1244,6 +1244,8 @@
   _globalConfig.activeClass = "zeroclipboard-is-active";
   if (typeof define === "function" && define.amd) {
     define(function() {
+      //修改 by 李桥 后面加入到了main.js作为全局变量以后不再报错
+      //window.ZeroClipboard = ZeroClipboard;
       return ZeroClipboard;
     });
   } else if (typeof module === "object" && module && typeof module.exports === "object" && module.exports) {

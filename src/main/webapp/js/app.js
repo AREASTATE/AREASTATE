@@ -1,5 +1,5 @@
 //采用angularAMD规范写
-define(["angular","angularAMD","allDirective","angular-ui-router","angularResource","angularUIBootstrap","bootstrap","ueditorAll","ueditor",],function(angular,angularAMD){
+define(["angular","angularAMD","allDirective","angular-ui-router","angularResource","angularUIBootstrap","bootstrap","ueditorAll","ueditor","ZeroClipboard","introJs"],function(angular,angularAMD){
 	//实例化angularJS
 	var app = angular.module("app",['ui.router','ngResource',"ui.bootstrap.tpls","ui.bootstrap","directiveModel","ng.ueditor"]);
 
@@ -97,6 +97,16 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 			controllerUrl:["../views/log/js/logList.js",
 			               "../views/log/js/logService.js"],
 		}))
+		/****************************************operator Start****************************************************/
+		//操作员列表
+		.state("main.operatorList",angularAMD.route({
+			url:"/operatorList",
+			templateUrl:"../views/operator/html/operatorList.html",
+			controller:"operatorListController",
+			controllerUrl:["../views/operator/js/operatorList.js",
+			               "../views/operator/js/operatorService.js"]
+		}))
+		/****************************************operator End****************************************************/
 		/****************************************PersonnalCenter Start****************************************************/
 		//个人中心
 		.state("main.personnalCenter",angularAMD.route({

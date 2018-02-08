@@ -1,14 +1,13 @@
-angular.module("landListModule",[]).
-controller("landListController",["$scope","$state","LandService",function($scope,$state,LandService){
-	$scope.pageSize = 8;
+angular.module("operatorListModule",[]).
+controller("operatorListController",["$scope","$state","OperatorService",function($scope,$state,OperatorService){
+	$scope.pageSize = 10;
 	$scope.currentPage = 1;  
 	$scope.searchCondition = "";
-	
 	$scope.init = function(){
 		$("#loading").modal("show");
-		LandService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
+		OperatorService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
 		function suc(data){
-			$scope.landList = data.pageList;
+			$scope.operatorList = data.pageList;
 			$scope.totalItems = data.totalItems;  
 			$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 			$("#loading").modal("hide");
@@ -18,30 +17,22 @@ controller("landListController",["$scope","$state","LandService",function($scope
 		}
 	}
 	
-	$scope.toAddForm = function(){
-		$state.go("main.landAddForm");
+	$scope.editOperator = function(id){
+		$state.go("main.OperatorEditForm",{"id":id,"operate":"edit"});
 	}
-
-	$scope.editLand = function(id){
-		$state.go("main.landEditForm",{"id":id,"operate":"edit"});
-	}
-
-	$scope.displayLand = function(id){
-		$state.go("main.landDisplay",{"id":id});
-	}
-
-	$scope.deleteLand = function(id){
+	
+	$scope.updateUserRole = function(id,role){
 		$("#effectiveing").modal("show");
-		LandService.deleteLand(id,suc,ero);
+		OperatorService.updateUserRole(id,role,suc,ero);
 		function suc(data){
 			$("#effectiveing").modal("hide");
 			$scope.init();
-		}
+		};
 		function ero(error){
 			$("#errorhapen").modal("show");
 		}
 	}
-
+	
 	/**
 	 * 下一页
 	 */
@@ -51,9 +42,9 @@ controller("landListController",["$scope","$state","LandService",function($scope
 		if(couputeResult<$scope.totalPage){
 			$("#loading").modal("show");
 			//禁用按钮
-			LandService.getSearchPageList(++$scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
+			OperatorService.getSearchPageList(++$scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
 			function suc(data){
-				$scope.landList = data.pageList;
+				$scope.operatorList = data.pageList;
 				$scope.totalItems = data.totalItems;  
 				$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 				$("#loading").modal("hide");
@@ -73,9 +64,9 @@ controller("landListController",["$scope","$state","LandService",function($scope
 		if(couputeResult>1){
 			$("#loading").modal("show");
 			//禁用按钮
-			LandService.getSearchPageList(--$scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
+			OperatorService.getSearchPageList(--$scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
 			function suc(data){
-				$scope.landList = data.pageList;
+				$scope.operatorList = data.pageList;
 				$scope.totalItems = data.totalItems;  
 				$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 				$("#loading").modal("hide");
@@ -88,48 +79,17 @@ controller("landListController",["$scope","$state","LandService",function($scope
 			alert("第一页");
 		}
 	} 
-
-
+	
+	
 	/**
 	 * 首页
 	 */
 	$scope.firstPage = function () { 
 		$("#loading").modal("show");
 		$scope.currentPage=1;
-		LandService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
+		OperatorService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
 		function suc(data){
-			$scope.landList = data.pageList;
-			$scope.totalItems = data.totalItems;  
-			$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
-			$("#loading").modal("hide");
-		};
-		function ero(error){
-			$("#errorhapen").modal("show");
-		}
-	} 
-
-	$scope.endPage = function () {
-		$("#loading").modal("show");
-		$scope.currentPage=1;
-		$scope.currentPage=$scope.totalPage;
-		LandService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
-		function suc(data){
-			$scope.landList = data.pageList;
-			$scope.totalItems = data.totalItems;  
-			$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
-			$("#loading").modal("hide");
-		};
-		function ero(error){
-			$("#errorhapen").modal("show");
-		}
-	} 
-
-	$scope.initalPageList = function () {  
-		$("#loading").modal("show");
-		$scope.currentPage = 1;
-		LandService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
-		function suc(data){
-			$scope.landList = data.pageList;
+			$scope.operatorList = data.pageList;
 			$scope.totalItems = data.totalItems;  
 			$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 			$("#loading").modal("hide");
@@ -139,12 +99,13 @@ controller("landListController",["$scope","$state","LandService",function($scope
 		}
 	} 
 	
-	$scope.changePageSize = function(){
+	$scope.endPage = function () {
 		$("#loading").modal("show");
-		$scope.currentPage = 1;
-		LandService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
+		$scope.currentPage=1;
+		$scope.currentPage=$scope.totalPage;
+		OperatorService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
 		function suc(data){
-			$scope.landList = data.pageList;
+			$scope.operatorList = data.pageList;
 			$scope.totalItems = data.totalItems;  
 			$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
 			$("#loading").modal("hide");
@@ -152,5 +113,27 @@ controller("landListController",["$scope","$state","LandService",function($scope
 		function ero(error){
 			$("#errorhapen").modal("show");
 		}
+	} 
+	
+	$scope.initalPageList = function () {  
+		$("#loading").modal("show");
+		$scope.currentPage = 1;
+		OperatorService.getSearchPageList($scope.currentPage,$scope.pageSize,$scope.searchCondition,suc,ero);
+		function suc(data){
+			$scope.operatorList = data.pageList;
+			$scope.totalItems = data.totalItems;  
+			$scope.totalPage = Math.ceil($scope.totalItems/$scope.pageSize);
+			$("#loading").modal("hide");
+		};
+		function ero(error){
+			$("#errorhapen").modal("show");
+		}
+	} 
+	
+	
+	$scope.openConfirmDialog = function(mes,type){
+		$("#updateRoleConfirm").modal("show");
+		$("#updateRoleConfirmContent").html(mes+"?");
+		$scope.type = type;
 	}
 }]);

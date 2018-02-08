@@ -1,7 +1,11 @@
 <fieldset ng-init="init()">
 	<legend style="font-size: 14px;">我的用地锁定记录</legend>
 	<div class="row search_div">
-		<div class="col-xs-5 col-md-offset-7">
+		<div class="col-xs-2" style="text-align: left;">
+			<button class="layui_btn mgl-20" style="margin-left: 10px;"
+				ng-click="toAddForm()">新建锁定申请</button>
+		</div>
+		<div class="col-xs-5 col-md-offset-5">
 			<input class="form-control" type="text" ng-model="searchCondition"
 				placeholder="请输入搜索条件"
 				style="width: 40%; display: inline-block; height: 30px;" />
@@ -15,7 +19,7 @@
 				<th>编码</th>
 				<th>申请场地</th>
 				<th>申请使用日期</th>
-				<th style="width:190px">申请时间段</th>
+				<th style="width: 190px">申请时间段</th>
 				<th>联系电话</th>
 				<th>状态</th>
 				<th>提交时间</th>
@@ -40,9 +44,12 @@
 					ng-click="updateLockingRecorderState(lockingRecord.code,'已废除')">解除占用</a>
 			</tr>
 			<tr ng-if="lockingRecordList.length != 0">
-				<td colspan="8"
-					style="height: 24px; line-height: 24px; border: 1px solid #e0e0e0; text-align: right;">
-					第<span>{{currentPage}}</span>页&nbsp;&nbsp;共<span>{{totalPage}}</span>页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<td colspan="8" class="pagetd">
+					每页显示 <select ng-model="pageSize" ng-change="init()">
+						<option>5</option>
+						<option>10</option>
+						<option>15</option>
+				</select> 条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 第<span>{{currentPage}}</span>页&nbsp;&nbsp;共<span>{{totalPage}}</span>页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button class="page_button" ng-click="firstPage()">首页</button>
 					<button class="page_button" ng-click="lastPage()">上一页</button>{{currentPage}}/{{totalPage}}
 					<button class="page_button" ng-click="nextPage()">下一页</button>

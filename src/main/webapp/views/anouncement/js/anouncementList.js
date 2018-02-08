@@ -31,6 +31,11 @@ controller("anouncementListController",["$scope","$state","AnouncementService",f
 		$state.go("main.anouncementEditForm",{"id":id,"operate":"edit"});
 	}
 	
+	
+	$scope.toAddForm = function(){
+		$state.go("main.anouncementAddForm");
+	}
+	
 	/**
 	 * 根据不同的紧急状态显示不同的样式
 	 */
