@@ -7,13 +7,10 @@ define(["angular","angularAMD","allDirective","angular-ui-router","angularResour
 	app.run(["$rootScope","$state","$stateParams","$window",function($rootScope, $state, $stateParams,$window) {
 		//获取浏览器的高度与宽度
 		$rootScope.wHeight = $window.innerHeight;
-//		window.onresize = function () {
-//			$("#leftnav").css("height",($rootScope.wHeight - $("#navb").height()-10) + "px");
-//			$("#rightctex").css("height",($rootScope.wHeight - $("#navb").height()-10) + "px");
-//			/*$scope.$apply(function(){
-//				console.log($window.innerWidth)
-//			})*/
-//		};
+		
+		$rootScope.pageSizesAry = [{size:5},
+		                           {size:10},
+		                           {size:15}];
 	}]);
 
 	/**

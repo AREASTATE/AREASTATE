@@ -42,7 +42,7 @@
 			<tr ng-if="operatorList.length != 0">
 				<td colspan="8" class="pagetd">
 					每页显示
-					<select ng-model="pageSize" ng-change="init()">
+					<select ng-model="$parent.pageSize" ng-change="init()">
 						<option>5</option>
 						<option>10</option>
 						<option>15</option>

@@ -1,6 +1,6 @@
 angular.module("lockingRecordListModule",[]).
 controller("lockingRecordListController",["$rootScope","$scope","$state","LockingRecordService",function($rootScope,$scope,$state,LockingRecordService){
-	$scope.pageSize = 8;
+	$scope.pageSize = 10;
 	$scope.currentPage = 1;  
 	$scope.searchCondition = "";
 	$scope.init = function(){

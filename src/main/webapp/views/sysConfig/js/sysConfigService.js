@@ -51,6 +51,17 @@ angular.module("SysConfigServiceModule",[])
 			}).success(successcb).error(errorcb);
 		};
 		
+		sysConfigService.getSearchPageList=function(pageIndex,pageSize,searchCondition,successcb,errorcb)//传入的两个方法
+		{
+			$http({
+				method: "POST",
+				headers: {'Content-type': 'application/x-www-form-urlencoded'},
+				url: "../sysConfigController/getSearchPageList",
+				data: {'pageIndex':pageIndex,'pageSize':pageSize,"searchCondition":searchCondition},
+				transformRequest:function (data) {return $.param(data);}
+			}).success(successcb).error(errorcb);
+		};
+		
 		return sysConfigService;
     
 }]);

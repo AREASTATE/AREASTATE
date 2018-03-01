@@ -1,6 +1,6 @@
 angular.module("landListModule",[]).
 controller("landListController",["$scope","$state","LandService",function($scope,$state,LandService){
-	$scope.pageSize = 8;
+	$scope.pageSize = 10;
 	$scope.currentPage = 1;  
 	$scope.searchCondition = "";
 	

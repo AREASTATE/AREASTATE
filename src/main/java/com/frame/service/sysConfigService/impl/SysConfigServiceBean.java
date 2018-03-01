@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.frame.dao.logDao.LogDao;
 import com.frame.dao.sysConfigDao.SysConfigDao;
+import com.frame.entity.land.Land;
 import com.frame.entity.sysconfig.SysConfig;
 import com.frame.service.sysConfigService.SysConfigService;
 
@@ -86,18 +87,26 @@ public class SysConfigServiceBean implements SysConfigService{
 		}
 	}
 
-//	public void saveLog( HttpServletRequest request,String operation){
-//		try {
-//			Log log = new Log();
-//			log.setOperateDate(new Date());
-//			log.setOperateSysConfig(((SysConfig)request.getSession(false).getAttribute("SysConfig")));
-//			log.setOperation(operation);
-//			//记录日志
-//			logDao.saveLog(log);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-
+	@Override
+	public List<SysConfig> getSearchPageList(Integer pageIndex,
+			Integer pageSize, String searchCondition, HttpServletRequest request){
+		try {
+			return this.sysConfigDao.getSearchPageList(pageIndex, pageSize, searchCondition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	public int getSearchTotalItems(String searchCondition, HttpServletRequest request){
+		try {
+			int totalItems = this.sysConfigDao.getSearchTotalItems(searchCondition);
+			return totalItems;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 1;
+		}
+	}
+	
 }

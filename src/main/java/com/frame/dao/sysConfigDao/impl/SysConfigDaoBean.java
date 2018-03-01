@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.frame.dao.sysConfigDao.SysConfigDao;
+import com.frame.entity.land.Land;
 import com.frame.entity.sysconfig.SysConfig;
 
 @Repository("sysConfigDao")
@@ -66,5 +67,27 @@ public class SysConfigDaoBean implements SysConfigDao{
 		List<SysConfig> SysConfigs = this.sqlSessionTemplate.selectList(selectSql);
 		return SysConfigs;
 	}
-	
+
+	@Override
+	public List<SysConfig> getSearchPageList(Integer pageIndex,
+			Integer pageSize, String searchCondition)
+					throws Exception {
+		
+		String selectSql = namespace + ".getSearchPageList";
+		Map paramMap= new HashMap<String, Object>();
+		int startIndex = pageSize * (pageIndex - 1);
+		paramMap.put("startIndex", startIndex);
+		paramMap.put("pageSize", pageSize);
+		paramMap.put("searchCondition", "%" + searchCondition + "%");
+		return this.sqlSessionTemplate.selectList(selectSql, paramMap);
+	}
+
+	@Override
+	public int getSearchTotalItems(String searchCondition)
+			throws Exception {
+		String selectSql = namespace + ".getSearchTotalItems";
+		Map paramMap= new HashMap<String, Object>();
+		paramMap.put("searchCondition", "%" + searchCondition + "%");
+		return this.sqlSessionTemplate.selectOne(selectSql,paramMap);
+	}
 }

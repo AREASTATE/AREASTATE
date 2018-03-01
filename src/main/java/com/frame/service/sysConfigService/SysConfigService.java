@@ -13,10 +13,15 @@ public interface SysConfigService {
 	
 	public SysConfig findSysConfigById(Integer id, HttpServletRequest request);
 	
-	SysConfig updateSysConfig(SysConfig SysConfig, HttpServletRequest request);
+	public SysConfig updateSysConfig(SysConfig SysConfig, HttpServletRequest request);
 	
-	List<SysConfig> findAllSysConfigs(HttpServletRequest request);
+	public List<SysConfig> findAllSysConfigs(HttpServletRequest request);
 
-	SysConfig findSysConfigByProperty(String property,
+	public SysConfig findSysConfigByProperty(String property,
 			HttpServletRequest request);
+
+	public List<SysConfig> getSearchPageList(Integer pageIndex, Integer pageSize,
+			String searchCondition, HttpServletRequest request);
+
+	public int getSearchTotalItems(String searchCondition, HttpServletRequest request);
 }

@@ -1,6 +1,6 @@
 angular.module("anouncementListModule",[]).
 controller("anouncementListController",["$scope","$state","AnouncementService",function($scope,$state,AnouncementService){
-	$scope.pageSize = 8;
+	$scope.pageSize = 10;
 	$scope.currentPage = 1;  
 	$scope.searchCondition = "";
 	$scope.init = function(){

@@ -1,6 +1,6 @@
 angular.module("landAssignedAndReliveListModule",[]).
 controller("landAssignedAndReliveListController",["$scope","$state","LockingRecordService",function($scope,$state,LockingRecordService){
-	$scope.pageSize = 8;
+	$scope.pageSize = 10;
 	$scope.currentPage = 1;  
 	$scope.searchCondition = "";
 	$scope.init = function(){

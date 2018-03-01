@@ -1,5 +1,5 @@
 angular.module("mainModule",["ui.bootstrap"])
-.controller("mainController",["$rootScope","$timeout","$scope","$state","$uibModal","RegisterAndLoginService",function($rootScope,$timeout,$scope,$state, $uibModal,RegisterAndLoginService){
+.controller("mainController",["$rootScope","$timeout","$scope","$state","$uibModal","$window","RegisterAndLoginService",function($rootScope,$timeout,$scope,$state, $uibModal,$window,RegisterAndLoginService){
 	$scope.init = function(){
 		$scope.innitWindowStyle();
 		$rootScope.usr = angular.fromJson(sessionStorage.getItem("currentUser"));
@@ -61,6 +61,13 @@ angular.module("mainModule",["ui.bootstrap"])
 	 * 适应屏幕高度
 	 */
 	$scope.innitWindowStyle = function (){
+		$("#leftnav").css("height",($rootScope.wHeight - $("#navb").height()-10) + "px");
+		$("#rightctex").css("height",($rootScope.wHeight - $("#navb").height()-10) + "px");
+	}
+	
+	window.onresize = function(){
+		//获取浏览器的高度与宽度
+		$rootScope.wHeight = $window.innerHeight;
 		$("#leftnav").css("height",($rootScope.wHeight - $("#navb").height()-10) + "px");
 		$("#rightctex").css("height",($rootScope.wHeight - $("#navb").height()-10) + "px");
 	}

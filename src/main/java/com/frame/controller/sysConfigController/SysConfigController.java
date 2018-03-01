@@ -1,6 +1,8 @@
 package com.frame.controller.sysConfigController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -57,5 +59,21 @@ public class SysConfigController {
     public List<SysConfig> findAllSysConfigs(HttpServletRequest request){
     	return this.sysConfigService.findAllSysConfigs(request);
     }
+    
+    @RequestMapping(value="/getSearchPageList",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String,Object> getSearchPageList(@RequestParam(value="pageIndex") Integer pageIndex,@RequestParam(value="pageSize") Integer pageSize,@RequestParam(value="searchCondition") String searchCondition, HttpServletRequest request){
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+    	resultMap.put("totalItems", this.sysConfigService.getSearchTotalItems(searchCondition, request));
+    	resultMap.put("pageList", this.sysConfigService.getSearchPageList(pageIndex, pageSize, searchCondition, request));
+    	return resultMap;
+    }
+    
+    @RequestMapping(value="/getSearchTotalItems",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public int getSearchTotalItems(@RequestParam(value="searchCondition") String searchCondition, HttpServletRequest request){
+    	return this.sysConfigService.getSearchTotalItems(searchCondition, request);
+    }
+    
     
 }
